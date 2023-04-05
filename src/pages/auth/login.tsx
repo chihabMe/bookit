@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Button from "~/components/ui/Button";
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 import { Input } from "@material-tailwind/react";
 import Link from "next/link";
 
@@ -14,7 +14,18 @@ const LoginPage = () => {
       <main className="flex flex min-h-screen flex-col items-center justify-center pt-[150px]   ">
         <div className="flex w-full max-w-[350px]  flex-col justify-center gap-4  ">
           <form className="flex w-full flex-col gap-4 py-4">
-            <Input placeholder="Email" className="!h-12 rounded-lg " />
+            <Input
+              placeholder="Email"
+              type="email"
+              icon={<EnvelopeIcon className="h-4 w-4" />}
+              className="!h-12 rounded-lg "
+            />
+            <Input
+              placeholder="Password"
+              type="password"
+              icon={<LockClosedIcon className="h-4 w-4" />}
+              className="!h-12 rounded-lg "
+            />
 
             <Button className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary">
               <span>sign in</span>

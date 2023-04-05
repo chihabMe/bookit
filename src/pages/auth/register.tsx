@@ -1,11 +1,45 @@
 import Head from "next/head";
 import Image from "next/image";
 import Button from "~/components/ui/Button";
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
-import { Input } from "@material-tailwind/react";
+import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
+import { ChangeEvent, FormEvent, useState } from "react";
+import { api } from "~/utils/api";
+import Input from "~/components/ui/Input";
+const initialState = {
+  email: "",
+  password: "",
+  rePassword: "",
+};
 const LoginPage = () => {
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    mutate: register,
+  } = api.auth.register.useMutation();
+  const [form, setForm] = useState(initialState);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(form);
+    register(
+      {
+        email: form.email,
+        password: form.password,
+        rePassword: form.rePassword,
+      },
+      {}
+    );
+  };
+  const fieldErrors = error?.data?.zodError?.fieldErrors;
+
+  console.log("errors", error?.data);
+  console.log("loading", isLoading);
+  console.log("is error", isError);
   return (
     <>
       <Head>
@@ -13,10 +47,42 @@ const LoginPage = () => {
       </Head>
       <main className="flex flex min-h-screen flex-col items-center justify-center pt-[150px]   ">
         <div className="flex w-full max-w-[350px]  flex-col justify-center gap-4  ">
-          <form className="flex w-full flex-col gap-4 py-4">
-            <Input className="!h-12 rounded-lg " />
+          <form
+            onSubmit={handleSubmit}
+            className="flex w-full flex-col gap-4 py-4"
+          >
+            <Input
+              placeholder="Email"
+              type="email"
+              name="email"
+              onChange={handleChange}
+              icon={<EnvelopeIcon className="h-4 w-4" />}
+              className="!h-12 rounded-lg "
+              errors={fieldErrors ? fieldErrors["email"] : undefined}
+            />
+            <Input
+              placeholder="Password"
+              name="password"
+              errors={fieldErrors ? fieldErrors["password"] : undefined}
+              onChange={handleChange}
+              type="password"
+              icon={<LockClosedIcon className="h-4 w-4" />}
+              className="!h-12 rounded-lg "
+            />
 
-            <Button className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary">
+            <Input
+              placeholder="Passwod Confirmation"
+              type="password"
+              name="rePassword"
+              errors={fieldErrors ? fieldErrors["rePassword"] : undefined}
+              onChange={handleChange}
+              icon={<LockClosedIcon className="h-4 w-4" />}
+              className="!h-12 rounded-lg "
+            />
+            <Button
+              type="submit"
+              className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary"
+            >
               <span>sign up</span>
             </Button>
 
