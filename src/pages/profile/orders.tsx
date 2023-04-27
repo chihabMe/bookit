@@ -7,15 +7,15 @@ const OrdersPage = () => {
     error,
     data: orders,
   } = api.ordres.getAllOrders.useQuery();
-  if (isError) return <div>{error?.message} </div>;
   if (isLoading) return <div>loading</div>;
+  if (isError || !orders) return <div>{error?.message} </div>;
   return (
     <div>
       <div>
-        {orders?.map((order) => (
-          <div>
-            <h2 key={order.id}>payment method {order.paymentMethod}</h2>
-            <h2 key={order.id}> ordred at {order.createdAt}</h2>
+        {orders.map((order) => (
+          <div key={order.id}>
+            <h2>payment method {order.paymentMethod}</h2>
+            <h2> ordred at {order.createdAt.toString()}</h2>
           </div>
         ))}
       </div>
