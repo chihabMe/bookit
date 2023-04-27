@@ -38,14 +38,13 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
   const decreaseItem = (id: string) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id != id
-          ? item
-          : item.quantity != 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : null
-      )
+    setItems(
+      (prev) =>
+        prev
+          .map((item) =>
+            item.id !== id ? item : { ...item, quantity: item.quantity - 1 }
+          )
+          .filter((item) => item.quantity != 0) // Remove null values from the array
     );
   };
   const removeItem = (id: string) => {
