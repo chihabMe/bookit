@@ -37,12 +37,16 @@ model Session {
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
+enum UserRoles {
+  admin
+  customer
+}
 model User {
     id            String    @id @default(cuid())
     name          String?
     email         String?   @unique
     emailVerified DateTime?
+    role UserRoles @default(customer)
     image         String?
     accounts      Account[]
     sessions      Session[]
@@ -70,9 +74,10 @@ model MenuItem {
   id            String          @id @default(uuid())
   name          String
   price         Decimal
+  description String
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @default(now()) @updatedAt
-  addedBy       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
   available     Boolean         @default(true)
   numberOfItems Int             @default(10)
