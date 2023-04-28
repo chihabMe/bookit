@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { CartContextProvider } from "~/context/cart.context";
 import Header from "~/components/layout/Header";
+import Container from "~/components/wrappers/Container";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -15,8 +16,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <CartContextProvider>
-      <Header/>
-        <Component {...pageProps} />
+        <Container>
+          <Header />
+          <Component {...pageProps} />
+        </Container>
       </CartContextProvider>
     </SessionProvider>
   );
