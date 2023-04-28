@@ -53,7 +53,8 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     setItems((prev) => prev.filter((item) => item.id != id));
   };
   const addItem = (item: ICartItem) => {
-    if (item.id in items.map((item) => item.id)) {
+    console.log("trying to add => ", item);
+    if (items.map((item) => item.id).includes(item.id)) {
       increaseItem(item.id);
     } else {
       setItems((prev) => [...prev, item]);

@@ -5,12 +5,13 @@ interface Props extends ButtonProps {
   className?: string;
 }
 
-const Button = ({ children, size, variant, className }: Props) => {
+const Button = ({ children, size, variant, className, onClick }: Props) => {
   return (
     <MTButton
       size={size}
       variant={variant}
       className={`  !bg-primary !text-text !shadow-none  !shadow-primary ${className!} `}
+      onClick={onClick}
     >
       {children}
     </MTButton>

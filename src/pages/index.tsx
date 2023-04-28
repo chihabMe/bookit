@@ -6,8 +6,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import MenuItemCart from "~/components/ui/MenuItemCart";
 import HomePage from "~/components/pages/HomePage";
+import CartLayout from "~/components/layout/CartLayout";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Head>
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
     </>
   );
 };
+Home.PageLayout = CartLayout;
 
 export default Home;
 

@@ -9,17 +9,18 @@ const CartItem = ({ item }: { item: ICartItem }) => {
         alt={`${item.name} image`}
         width={50}
         height={50}
-        className="rounded-md"
+        className="rounded-full"
       />
-      <div className="flex flex-col gap-2">
-        <span className="text-sm font-medium text-title">{item.name}</span>
+      <div className="   flex w-full max-w-[220px] flex-col gap-2 ">
+        <span className="   font-bold text-title">{item.name}</span>
         <span className="font-medium">
-          <span className="text-primary">x</span>
+          <span className="   font-bold text-primary ">{"x"}</span>
           {item.quantity}
         </span>
       </div>
       <div>
-        $<span className="text-sm font-medium">{item.price.toString()}</span>
+        <span className="font-bold text-primary">$ </span>
+        <span className="  font-bold text-title">{item.price.toString()}</span>
       </div>
     </li>
   );

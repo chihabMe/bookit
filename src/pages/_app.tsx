@@ -9,11 +9,18 @@ import { CartContextProvider } from "~/context/cart.context";
 import Header from "~/components/layout/Header";
 import Container from "~/components/wrappers/Container";
 import LeftAside from "~/components/layout/LeftAside";
+import { AppProps } from "next/dist/shared/lib/router/router";
+import { ReactNode } from "react";
+
+type IComponentWithPageLayout = AppProps["Component"] & {
+  PageLayout?: React.ComponentType<{ children: ReactNode }>;
+};
 
 const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
   pageProps: { session, ...pageProps },
+  Component,
 }) => {
+  const ComponentWithPageLayout = Component as IComponentWithPageLayout;
   return (
     <SessionProvider session={session}>
       <CartContextProvider>
@@ -22,7 +29,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <LeftAside />
             <div className="max-h-screen w-full overflow-y-scroll px-2 py-2 ">
               <Header />
-              <Component {...pageProps} />
+              {ComponentWithPageLayout.PageLayout && (
+                <ComponentWithPageLayout.PageLayout>
+                  <Component {...pageProps} />
+                </ComponentWithPageLayout.PageLayout>
+              )}
+              {!ComponentWithPageLayout.PageLayout && (
+                <ComponentWithPageLayout />
+              )}
             </div>
           </div>
         </Container>

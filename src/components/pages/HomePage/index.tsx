@@ -4,6 +4,7 @@ import HomePageMenuCategories from "./HomePageMenuCategories";
 import { useState } from "react";
 import { MenuCategory } from "@prisma/client";
 import HomeMenuItems from "./HomeMenuItems";
+import Cart from "~/components/layout/Cart";
 
 const HomePage = () => {
   const [currentCategory, setCurrentCategory] = useState<MenuCategory | null>(
@@ -16,7 +17,7 @@ const HomePage = () => {
     setCurrentCategory((prev) => (prev == null ? category : prev));
   };
   return (
-    <section>
+    <section className="">
       <HomePageHero />
       <Title text="menu categories" />
       <HomePageMenuCategories

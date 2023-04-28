@@ -20,12 +20,18 @@ import {
 import { MenuItem } from "@prisma/client";
 import Button from "./Button";
 import Image from "next/image";
+import useCart from "~/hooks/useCart";
 
 const MenuItemCart = ({ item }: { item: MenuItem }) => {
+  const { addItem } = useCart();
   const stars = [];
   for (let i = 1; i <= 4; i++) {
     stars.push(<StarIcon className="h-3 w-3 text-primary" />);
   }
+  const addToCartHandler = () => {
+    console.log("add op <=>");
+    addItem({ ...item, quantity: 1 });
+  };
   return (
     <Card className="!w-[270px] w-full max-w-[26rem] cursor-pointer  rounded-[20px] shadow-lg transition-all duration-100   hover:ring-2 hover:ring-primary">
       <CardHeader className="flex flex-col items-center !py-1 " floated={false}>
@@ -48,7 +54,11 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
               $ {item.price.toString()}
             </span>
           </div>
-          <Button size="sm" className="   !rounded-full  ">
+          <Button
+            onClick={addToCartHandler}
+            size="sm"
+            className="   !rounded-full  "
+          >
             <PlusIcon className="h-3 w-3 text-white" />
           </Button>
         </div>
