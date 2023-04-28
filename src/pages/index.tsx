@@ -8,11 +8,6 @@ import MenuItemCart from "~/components/ui/MenuItemCart";
 import HomePage from "~/components/pages/HomePage";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const menuItems = api.menu.getAllMenuItems.useQuery();
-  const { isLoading, isError, data, error } =
-    api.menu.getAllMenuItems.useQuery();
-
   return (
     <>
       <Head>

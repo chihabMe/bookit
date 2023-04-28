@@ -7,6 +7,23 @@ export const menuRouter = createTRPCRouter({
   getAllMenuItems: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.menuItem.findMany();
   }),
+  getAllCategories: publicProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.menuCategory.findMany();
+  }),
+  getMenuItemsByCategory: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.menuCategory.findMany({
+        where: { id: input.id },
+        select: {
+          items: true,
+        },
+      });
+    }),
   addItemToTheMenu: protectedProcedure
     .input(
       z.object({
