@@ -4,7 +4,17 @@ import withMT from "@material-tailwind/react/utils/withMT";
 export default withMT({
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#ffad0a",
+        "bg-light": "#fff",
+        "bg-dark": "#383131",
+        text: "383838",
+        title: "161616",
+        "text-dark": "939393",
+        "title-dark": "e2e2e2",
+      },
+    },
   },
   plugins: [],
 });
