@@ -27,7 +27,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Container>
           <div className="flex w-full gap-2">
             <LeftAside />
-            <div className="max-h-screen w-full overflow-y-scroll px-2 py-2 ">
+            <div className="scrollbar-hide max-h-screen w-full overflow-y-scroll px-2 py-2">
               <Header />
               {ComponentWithPageLayout.PageLayout && (
                 <ComponentWithPageLayout.PageLayout>

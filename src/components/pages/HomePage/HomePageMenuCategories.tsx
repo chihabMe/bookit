@@ -29,7 +29,7 @@ const HomePageMenuCategories = ({
   if (isLoading) return <h1>loading</h1>;
   if (isError || !categories) return <h1>{error.message}</h1>;
   return (
-    <ul className="hide-scroll-bar flex w-full max-w-[900px] flex-nowrap gap-2 overflow-x-scroll py-4">
+    <ul className=" scrollbar-hide flex w-full max-w-[900px] flex-nowrap gap-2 overflow-x-scroll py-4">
       {categories.map((category) => (
         <HomePageMenuCategoryItem
           changeCategory={handleChangeCategory}
