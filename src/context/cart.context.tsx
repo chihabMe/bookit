@@ -1,24 +1,26 @@
 import { ReactNode, createContext, useEffect } from "react";
 import { MenuItem, Prisma } from "@prisma/client";
 import { useState } from "react";
+
+export interface ICartItem extends MenuItem {
+  quantity: number;
+}
+
 interface ICartContext {
   getTotal: () => number;
-  items: CartItem[];
+  items: ICartItem[];
   cleare: () => void;
-  addItem: (item: CartItem) => void;
+  addItem: (item: ICartItem) => void;
   removeItem: (id: string) => void;
   increaseItem: (id: string) => void;
   getNumberOfItems: () => number;
   decreaseItem: (id: string) => void;
 }
-interface CartItem extends MenuItem {
-  quantity: number;
-}
 
 const initialState: ICartContext = {
   items: [],
   cleare: () => null,
-  addItem: (item: CartItem) => null,
+  addItem: (item: ICartItem) => null,
   removeItem: (id: string) => null,
   increaseItem: (id: string) => null,
   getNumberOfItems: () => 0,
@@ -50,7 +52,7 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   const removeItem = (id: string) => {
     setItems((prev) => prev.filter((item) => item.id != id));
   };
-  const addItem = (item: CartItem) => {
+  const addItem = (item: ICartItem) => {
     if (item.id in items.map((item) => item.id)) {
       increaseItem(item.id);
     } else {

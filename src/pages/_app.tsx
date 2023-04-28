@@ -8,6 +8,7 @@ import "~/styles/globals.css";
 import { CartContextProvider } from "~/context/cart.context";
 import Header from "~/components/layout/Header";
 import Container from "~/components/wrappers/Container";
+import LeftAside from "~/components/layout/LeftAside";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -17,8 +18,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Container>
-          <Header />
-          <Component {...pageProps} />
+          <div className="flex w-full gap-2">
+            <LeftAside />
+            <div className="w-full">
+              <Header />
+              <Component {...pageProps} />
+            </div>
+          </div>
         </Container>
       </CartContextProvider>
     </SessionProvider>

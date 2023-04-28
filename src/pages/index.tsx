@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import MenuItemCart from "~/components/ui/MenuItemCart";
+import HomePage from "~/components/pages/HomePage";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -19,11 +20,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        {isLoading && <h1>loading</h1>}
-        {!isLoading && isError && <div>{error.message}</div>}
-        {!isLoading &&
-          data &&
-          data.map((item) => <MenuItemCart key={item.id} item={item} />)}
+        <HomePage />
       </main>
     </>
   );
