@@ -28,7 +28,6 @@ const initialState: ICartContext = {
   getTotal: () => 0,
 };
 export const cartContext = createContext(initialState);
-
 export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState(initialState.items);
   const getNumberOfItems = () => items.length;
@@ -53,7 +52,6 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     setItems((prev) => prev.filter((item) => item.id != id));
   };
   const addItem = (item: ICartItem) => {
-    console.log("trying to add => ", item);
     if (items.map((item) => item.id).includes(item.id)) {
       increaseItem(item.id);
     } else {
@@ -63,6 +61,19 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   const cleare = () => {
     setItems([]);
   };
+  useEffect(() => {
+    if (items.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(items));
+    }
+  }, [items]);
+  useEffect(() => {
+    if (localStorage) {
+      const cartItems = JSON.parse(
+        localStorage.getItem("cart") ?? "[]"
+      ) as ICartItem[];
+      setItems(cartItems);
+    }
+  }, []);
   const getTotal = () => {
     return items.reduce((current, item) => {
       return current + (item.price.toNumber() * 10 * item.quantity) / 10;
