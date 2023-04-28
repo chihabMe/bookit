@@ -4,12 +4,12 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Button,
   Tooltip,
   IconButton,
 } from "@material-tailwind/react";
 import {
   BanknotesIcon,
+  PlusIcon,
   StarIcon,
   HeartIcon,
   WifiIcon,
@@ -18,46 +18,40 @@ import {
   FireIcon,
 } from "@heroicons/react/24/solid";
 import { MenuItem } from "@prisma/client";
+import Button from "./Button";
+import Image from "next/image";
 
 const MenuItemCart = ({ item }: { item: MenuItem }) => {
+  const stars = [];
+  for (let i = 1; i <= 4; i++) {
+    stars.push(<StarIcon className="h-3 w-3 text-primary" />);
+  }
   return (
-    <Card className="w-full max-w-[26rem] shadow-lg">
-      <CardHeader floated={false} color="blue-gray">
-        <img
-          src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-          alt="ui/ux review check"
+    <Card className="w-full max-w-[26rem]   shadow-lg">
+      <CardHeader className="flex flex-col items-center !py-1 " floated={false}>
+        <Image
+          alt={`${item.name} image`}
+          src={"https://picsum.photos/150/150"}
+          width={150}
+          height={150}
+          className=" !w-100 !h-100 rounded-full "
         />
-        <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-        <IconButton
-          size="sm"
-          color="red"
-          variant="text"
-          className="!absolute right-4 top-4 rounded-full"
-        >
-          <HeartIcon className="h-6 w-6" />
-        </IconButton>
       </CardHeader>
-      <CardBody>
-        <div className="mb-3 flex items-center justify-between">
-          <Typography variant="h5" color="blue-gray" className="font-medium">
-            {item.name}
-          </Typography>
-          <Typography
-            color="blue-gray"
-            className="flex items-center gap-1.5 font-normal"
-          >
-            <StarIcon className="-mt-0.5 h-5 w-5 text-yellow-700" />4
-          </Typography>
-        </div>
-        <Typography color="gray">
-          Enter a freshly updated and thoughtfully furnished peaceful home
-          surrounded by ancient trees, stone walls, and open meadows.
-        </Typography>
+      <CardBody className="flex flex flex-col flex-col    !pt-1">
+        <span className="font-bold capitalize text-title">{item.name}</span>
       </CardBody>
       <CardFooter className="pt-3">
-        <Button size="lg" fullWidth={true}>
-          add to cart
-        </Button>
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-2">
+            <span className="flex gap-1 ">{stars}</span>
+            <span className="  font-bold text-title">
+              $ {item.price.toString()}
+            </span>
+          </div>
+          <Button size="sm" className="   !rounded-full  ">
+            <PlusIcon className="h-3 w-3 text-white" />
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   );

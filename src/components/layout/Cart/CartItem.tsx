@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ICartItem } from "~/context/cart.context";
 
-const CartItem = (item: ICartItem) => {
+const CartItem = ({ item }: { item: ICartItem }) => {
   return (
     <li className="flex items-center justify-between py-2">
       <Image
@@ -19,7 +19,7 @@ const CartItem = (item: ICartItem) => {
         </span>
       </div>
       <div>
-        $<span className="text-sm font-medium">{item.price}</span>
+        $<span className="text-sm font-medium">{item.price.toString()}</span>
       </div>
     </li>
   );

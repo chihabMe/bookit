@@ -10,7 +10,7 @@ export default withMT({
         "bg-light": "#fff",
         "bg-dark": "#383131",
         text: "383838",
-        title: "161616",
+        title: "#141414",
         "text-dark": "939393",
         "title-dark": "e2e2e2",
       },

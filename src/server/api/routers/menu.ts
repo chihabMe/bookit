@@ -17,7 +17,7 @@ export const menuRouter = createTRPCRouter({
       })
     )
     .query(({ ctx, input }) => {
-      return ctx.prisma.menuCategory.findMany({
+      return ctx.prisma.menuCategory.findFirst({
         where: { id: input.id },
         select: {
           items: true,
@@ -30,6 +30,7 @@ export const menuRouter = createTRPCRouter({
         name: z.string(),
         price: z.number(),
         description: z.string(),
+        categoryId: z.string(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -42,6 +43,7 @@ export const menuRouter = createTRPCRouter({
           price: input.price,
           description: input.description,
           userId: user.id,
+          menuCategoryId: input.categoryId,
         },
       });
     }),

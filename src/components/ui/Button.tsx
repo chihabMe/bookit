@@ -1,13 +1,18 @@
-import { ReactNode } from "react";
-import { Button as MTButton, ButtonProps } from "@material-tailwind/react";
+import React, { ReactNode } from "react";
+import { Button as MTButton, type ButtonProps } from "@material-tailwind/react";
 
-const Button = (props: ButtonProps) => {
+interface Props extends ButtonProps {
+  className?: string;
+}
+
+const Button = ({ children, size, variant, className }: Props) => {
   return (
     <MTButton
-      {...props}
-      className={`  !bg-primary !text-text !shadow-none  !shadow-primary ${props.className} `}
+      size={size}
+      variant={variant}
+      className={`  !bg-primary !text-text !shadow-none  !shadow-primary ${className!} `}
     >
-      {props.children}
+      {children}
     </MTButton>
   );
 };
