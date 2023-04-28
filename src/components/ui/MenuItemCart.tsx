@@ -27,20 +27,20 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
     stars.push(<StarIcon className="h-3 w-3 text-primary" />);
   }
   return (
-    <Card className="w-full max-w-[26rem]   shadow-lg">
+    <Card className="!w-[270px] w-full max-w-[26rem] cursor-pointer  rounded-[20px] shadow-lg transition-all duration-100   hover:ring-2 hover:ring-primary">
       <CardHeader className="flex flex-col items-center !py-1 " floated={false}>
         <Image
           alt={`${item.name} image`}
           src={"https://picsum.photos/150/150"}
-          width={150}
-          height={150}
-          className=" !w-100 !h-100 rounded-full "
+          width={140}
+          height={140}
+          className="   rounded-full "
         />
       </CardHeader>
-      <CardBody className="flex flex flex-col flex-col    !pt-1">
+      <CardBody className="flex flex flex-col flex-col    !pt-2">
         <span className="font-bold capitalize text-title">{item.name}</span>
       </CardBody>
-      <CardFooter className="pt-3">
+      <CardFooter className="   pt-0 ">
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
             <span className="flex gap-1 ">{stars}</span>

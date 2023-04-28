@@ -83,7 +83,7 @@ const HomePageMenuCategoryItem = ({
   return (
     <li
       onClick={(e) => changeCategory(item)}
-      className="inline-flex h-[150px] w-[110px] flex-shrink-0 cursor-pointer flex-col items-center gap-2 rounded-lg bg-primary p-2 text-sm transition-all duration-100 hover:scale-105 hover:opacity-90"
+      className="inline-flex h-[150px] w-[110px] flex-shrink-0 cursor-pointer flex-col items-center gap-2 rounded-[20px] bg-primary p-2 text-sm transition-all duration-100 hover:scale-105 hover:opacity-90"
     >
       <Image
         width={80}
