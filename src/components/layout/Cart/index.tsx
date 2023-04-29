@@ -4,7 +4,7 @@ import Title from "~/components/ui/Title";
 import Button from "~/components/ui/Button";
 
 const Cart = () => {
-  const { items, getNumberOfItems } = useCart();
+  const { items, getNumberOfItems, getTotal } = useCart();
   if (getNumberOfItems() == 0) return <EmptyCardView />;
   return (
     <aside className="w-full">
@@ -14,7 +14,12 @@ const Cart = () => {
           <CartItem key={item.id} item={item} />
         ))}
       </ul>
-      <Button className="my-8 h-14 w-full rounded-full py-2 text-[15px]  font-bold capitalize text-white">
+      <div className="flex w-full justify-end">
+        <span className="dark:text-title:dark text-xl font-bold text-title">
+          Total ${getTotal().toFixed(2)}
+        </span>
+      </div>
+      <Button className="my-8 h-14 w-full rounded-full py-2 text-[15px] font-bold capitalize text-white transition-all  duration-200 hover:ring-2 hover:ring-primary">
         checkout
       </Button>
     </aside>
