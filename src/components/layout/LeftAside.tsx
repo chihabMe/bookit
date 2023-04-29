@@ -12,8 +12,11 @@ import { useRouter } from "next/router";
 
 const LeftAside = () => {
   return (
-    <aside className="h-full w-[100px] px-4 pt-4">
-      <ul className="flex flex-col gap-4">
+    <aside
+      className="fixed bottom-0 left-0 right-0 z-50  flex w-full bg-bg-light px-4 py-4 dark:bg-bg-dark md:z-50 md:h-full md:w-[100px] md:py-0
+"
+    >
+      <ul className="mx-auto flex gap-4 md:flex-col">
         <LeftAsideItem href="/" Icon={<HomeIcon className="h-6 w-6" />} />
         <LeftAsideItem
           href="/profile/messages"

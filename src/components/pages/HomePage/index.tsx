@@ -17,7 +17,7 @@ const HomePage = () => {
     setCurrentCategory((prev) => (prev == null ? category : prev));
   };
   return (
-    <section className="">
+    <section className="w-full">
       <HomePageHero />
       <Title text="menu categories" />
       <HomePageMenuCategories

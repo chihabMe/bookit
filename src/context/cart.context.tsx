@@ -76,7 +76,9 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
   const getTotal = () => {
     return items.reduce((current, item) => {
-      return current + (item.price.toNumber() * 10 * item.quantity) / 10;
+      return (
+        current + (parseInt(item.price.toString()) * 10 * item.quantity) / 10
+      );
     }, 0);
   };
 
