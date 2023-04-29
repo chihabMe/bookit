@@ -21,11 +21,12 @@ const HomePage = () => {
       <HomePageHero />
       <Title text="menu categories" />
       <HomePageMenuCategories
+        currentCategory={currentCategory}
         setCategoryIfNull={setCategoryIfNull}
         handleChangeCategory={handleChangeCategory}
       />
       {currentCategory && <Title text={`${currentCategory.name} menu`} />}
-      {currentCategory && <HomeMenuItems category={currentCategory} />}
+      {currentCategory && <HomeMenuItems curr category={currentCategory} />}
     </section>
   );
 };

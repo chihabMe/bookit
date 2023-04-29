@@ -20,7 +20,7 @@ const CartLayout = ({ children }: { children: ReactNode }) => {
             animate={{ translateX: 0 }}
             exit={{ translateX: 300 }}
             transition={{ duration: 0.2, ease: "linear" }}
-            className={`w-[400px]    `}
+            className={`w-[470px]    `}
           >
             <Cart />
           </motion.div>

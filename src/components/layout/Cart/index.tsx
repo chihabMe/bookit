@@ -8,9 +8,8 @@ const Cart = () => {
   if (getNumberOfItems() == 0) return <EmptyCardView />;
   return (
     <aside className="w-full">
-      <div className="h-[150px] w-full bg-primary"></div>
       <Title text="order menu" />
-      <ul className="flex max-h-[400px] flex-col gap-2 overflow-y-scroll">
+      <ul className="flex max-h-[350px] min-h-[345px] flex-col gap-2 overflow-y-scroll   py-4">
         {items.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
