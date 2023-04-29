@@ -33,7 +33,7 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
     addItem({ ...item, quantity: 1 });
   };
   return (
-    <Card className="!w-[270px] w-full max-w-[26rem] cursor-pointer  rounded-[20px] shadow-lg transition-all duration-100   hover:ring-2 hover:ring-primary">
+    <Card className="!w-[270px] w-full max-w-[26rem]   rounded-[20px] shadow-lg transition-all duration-100   hover:ring-2 hover:ring-primary">
       <CardHeader className="flex flex-col items-center !py-1 " floated={false}>
         <Image
           alt={`${item.name} image`}
