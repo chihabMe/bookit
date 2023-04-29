@@ -11,16 +11,18 @@ import {
   BanknotesIcon,
   PlusIcon,
   StarIcon,
-  HeartIcon,
+  HeartIcon as SolidHeart,
   WifiIcon,
   HomeIcon,
   TvIcon,
   FireIcon,
 } from "@heroicons/react/24/solid";
+import { HeartIcon as OutlinedHeart } from "@heroicons/react/24/outline";
 import { MenuItem } from "@prisma/client";
 import Button from "./Button";
 import Image from "next/image";
 import useCart from "~/hooks/useCart";
+import { useState } from "react";
 
 const MenuItemCart = ({ item }: { item: MenuItem }) => {
   const { addItem } = useCart();
@@ -32,9 +34,21 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
     console.log("add op <=>");
     addItem({ ...item, quantity: 1 });
   };
+  const [liked, setLiked] = useState(false);
+  const handleLikeClick = () => setLiked((prev) => !prev);
   return (
-    <Card className="!w-[270px] w-full max-w-[26rem]   rounded-[20px] shadow-lg transition-all duration-100   hover:ring-2 hover:ring-primary">
-      <CardHeader className="flex flex-col items-center !py-1 " floated={false}>
+    <Card className="!shadow-xs !w-[270px] w-full max-w-[26rem]   rounded-[20px] shadow-lg transition-all duration-100   ">
+      <CardHeader
+        className="static flex flex-col items-center !py-1  !shadow-none "
+        floated={false}
+      >
+        <Button
+          onClick={handleLikeClick}
+          className="!absolute !right-[20px] !top-[5px] rounded-md !bg-transparent p-2 hover:ring-2 hover:ring-red-300 "
+        >
+          {!liked && <OutlinedHeart className="h-6 w-6 text-red-400" />}
+          {liked && <SolidHeart className="h-6 w-6 text-red-400" />}
+        </Button>
         <Image
           alt={`${item.name} image`}
           src={"https://picsum.photos/150/150"}
@@ -57,7 +71,7 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
           <Button
             onClick={addToCartHandler}
             size="sm"
-            className="   !rounded-full  "
+            className="   !rounded-md  "
           >
             <PlusIcon className="h-3 w-3 text-white" />
           </Button>

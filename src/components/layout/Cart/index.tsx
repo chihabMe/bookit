@@ -5,17 +5,19 @@ import Button from "~/components/ui/Button";
 
 const Cart = () => {
   const { items, getNumberOfItems, getTotal } = useCart();
-  if (getNumberOfItems() == 0) return <EmptyCardView />;
   return (
     <aside className="w-full">
       <Title text="order menu" />
-      <ul className="flex max-h-[350px] min-h-[345px] flex-col gap-2 overflow-y-scroll   py-4">
+      <ul className="flex  max-h-[250px] min-h-[245px] flex-col gap-2  overflow-y-scroll   py-4  md:max-h-[350px]   md:min-h-[345px]">
         {items.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </ul>
-      <div className="flex w-full justify-end">
-        <span className="dark:text-title:dark text-xl font-bold text-title">
+      <div className="flex w-full justify-end justify-between gap-2 px-2">
+        <span className="dark:text-title:dark font-bold text-title md:text-xl">
+          {getNumberOfItems()} items
+        </span>
+        <span className="dark:text-title:dark font-bold text-title md:text-xl">
           Total ${getTotal().toFixed(2)}
         </span>
       </div>

@@ -5,15 +5,30 @@ import {
   ChevronUpIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+import { useWillChange } from "framer-motion";
+import { useRouter } from "next/router";
 import Button from "~/components/ui/Button";
 import useAppDispatch from "~/hooks/useAppDispatch";
 import useAppSelector from "~/hooks/useAppSelector";
 import useCart from "~/hooks/useCart";
+import useWindowSize from "~/hooks/useWindowSize";
 import { uiActions } from "~/store/slices/ui.slice";
 const HeaderAccount = () => {
   const dispatch = useAppDispatch();
   const { getNumberOfItems } = useCart();
-  const toggleCart = () => dispatch(uiActions.toggleCart());
+  const windowSize = useWindowSize();
+  const router = useRouter();
+  const toggleCart = () => {
+    if (windowSize.width && windowSize.width < 500) {
+      try {
+        router.push("/cart");
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      dispatch(uiActions.toggleCart());
+    }
+  };
   return (
     <div className="flex  items-center gap-4 ">
       <Button

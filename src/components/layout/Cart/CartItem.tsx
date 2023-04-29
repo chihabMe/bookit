@@ -17,17 +17,17 @@ const CartItem = ({ item }: { item: ICartItem }) => {
   const handleDeleteItemFromCart = () => removeItem(item.id);
 
   return (
-    <li className="flex items-center justify-between  gap-2 overflow-x-hidden  py-2">
+    <li className=" flex items-center  justify-between gap-2  overflow-x-hidden py-2">
       <Image
         src={"https://picsum.photos/100/100"}
         alt={`${item.name} image`}
         width={80}
         height={80}
-        className="h-[60px] w-[60px] rounded-full"
+        className=" h-[50px] w-[50px] rounded-full md:h-[60px] md:w-[60px]"
       />
       <div className="flex ">
-        <div className="   flex w-full min-w-[220px] flex-col gap-2 ">
-          <span className="  font-bold  capitalize text-title dark:text-title-dark">
+        <div className="   flex w-full min-w-[170px] flex-col gap-2 md:min-w-[220px] ">
+          <span className="    font-bold capitalize text-title dark:text-title-dark">
             {item.name}
           </span>
 
@@ -38,7 +38,7 @@ const CartItem = ({ item }: { item: ICartItem }) => {
             >
               <ChevronUpIcon className="h-4  w-4 text-primary  text-white " />
             </Button>
-            <span className="text-sm font-bold text-title ">
+            <span className="min-w-[20px]  text-sm font-bold text-title">
               {item.quantity}
             </span>
             <Button

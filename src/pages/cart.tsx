@@ -7,7 +7,7 @@ const CartPage = () => {
       <Head>
         <title>cart page</title>
       </Head>
-      <main className=" flex min-h-screen items-center justify-center ">
+      <main className="  min-h-screen  pt-[100px] ">
         <section className="mx-auto w-full max-w-[700px] ">
           <Cart />
         </section>
