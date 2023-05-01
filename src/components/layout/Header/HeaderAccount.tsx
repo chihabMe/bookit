@@ -27,11 +27,12 @@ const HeaderAccount = () => {
 
   const toggleCart = () => {
     if (windowSize.width && windowSize.width < 500) {
-      try {
-        router.push("/cart");
-      } catch (err) {
-        console.error(err);
-      }
+      router
+        .push("/cart")
+        .then()
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       dispatch(uiActions.toggleCart());
     }
