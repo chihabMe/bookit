@@ -31,7 +31,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <CartContextProvider>
           <NextPrograssBar color="orange" options={{ showSpinner: false }} />
           <Container>
-            <ToasterWrapper position="bottom-right">
+            <ToasterWrapper>
               <div className="flex w-full gap-2">
                 <LeftAside />
                 <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">

@@ -25,10 +25,10 @@ const HeaderAccount = () => {
   const windowSize = useWindowSize();
   const router = useRouter();
 
-  const toggleCart = async (e: ChangeEvent<HTMLButtonElement>) => {
+  const toggleCart = () => {
     if (windowSize.width && windowSize.width < 500) {
       try {
-        await router.push("/cart");
+        router.push("/cart");
       } catch (err) {
         console.error(err);
       }
@@ -39,7 +39,7 @@ const HeaderAccount = () => {
   return (
     <div className="flex  items-center gap-4 ">
       <Button
-        onClick={(e) => toggleCart(e)}
+        onClick={toggleCart}
         className=" relative cursor-pointer !bg-transparent px-2 py-2 text-text"
       >
         <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
