@@ -1,15 +1,13 @@
-import Head from "next/head"
+import Head from "next/head";
 
 const LoginPage = () => {
-  return
+  return (
     <>
-        <Head>
-        <title>
-        login page
-        </title>
-        </Head>
-
-        <main></main>
-    <>
+      <Head>
+        <title>login page</title>
+      </Head>
+      <main></main>
+    </>
+  );
 };
 export default LoginPage;
