@@ -3,6 +3,7 @@ import { api } from "~/utils/api";
 import Image from "next/image";
 import { useEffect } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import Skeleton from "react-loading-skeleton";
 interface Props {
   handleChangeCategory: (category: MenuCategory) => void;
   setCategoryIfNull: (category: MenuCategory) => void;
@@ -28,7 +29,7 @@ const HomePageMenuCategories = ({
       }
     }
   }, [isLoading, categories]);
-  if (isLoading) return <h1>loading</h1>;
+  if (isLoading) return <MenuCategoriesSkelton />;
   if (isError || !categories) return <h1>{error.message}</h1>;
   return (
     <ul className=" scrollbar-hide flex w-full  flex-nowrap gap-2 overflow-x-scroll py-4">
@@ -119,6 +120,37 @@ const HomePageMenuCategoryItem = ({
         />
       </div>
     </li>
+  );
+};
+
+const MenuCategoryItemSkelton = () => {
+  return (
+    <li
+      className={`group inline-flex h-[170px] w-[110px] flex-shrink-0 cursor-pointer flex-col items-center gap-2 rounded-[20px] 
+       p-2 text-sm transition-all duration-200 hover:scale-105 hover:bg-primary hover:opacity-90`}
+    >
+      <Skeleton circle width={80} height={80} />
+      <span className="text-sm font-medium capitalize  text-white">
+        <Skeleton count={3} width={70} />
+      </span>
+    </li>
+  );
+};
+const MenuCategoriesSkelton = () => {
+  return (
+    <ul className=" scrollbar-hide flex w-full  flex-nowrap gap-2 overflow-x-scroll py-4">
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+      <MenuCategoryItemSkelton />
+    </ul>
   );
 };
 export default HomePageMenuCategories;

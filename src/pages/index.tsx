@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import MenuItemCart from "~/components/ui/MenuItemCart";
 import CartLayout from "~/components/layout/CartLayout";
 import Button from "~/components/ui/Button";
+import Header from "~/components/layout/Header";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
+        <Header />
         <section className=" mx-auto mt-[60px] w-full max-w-[1000px]">
           <div className="flex w-[400px] flex-col gap-[8px] text-5xl font-bold capitalize text-text dark:text-text-dark">
             <h1>the fastest</h1>
@@ -47,7 +49,6 @@ const Home = () => {
     </>
   );
 };
-Home.PageLayout = CartLayout;
 
 export default Home;
 

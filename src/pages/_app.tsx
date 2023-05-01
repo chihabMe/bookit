@@ -15,6 +15,8 @@ import { ReactNode } from "react";
 import store from "~/store";
 import ToasterWrapper from "~/components/wrappers/ToasterWrapper";
 import NextPrograssBar from "nextjs-progressbar";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
   PageLayout?: React.ComponentType<{ children: ReactNode }>;
@@ -29,25 +31,26 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <ReduxProvider store={store}>
         <CartContextProvider>
-          <NextPrograssBar color="orange" options={{ showSpinner: false }} />
-          <Container>
-            <ToasterWrapper>
-              <div className="flex w-full gap-2">
-                <LeftAside />
-                <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
-                  <Header />
-                  {ComponentWithPageLayout.PageLayout && (
-                    <ComponentWithPageLayout.PageLayout>
-                      <Component {...pageProps} />
-                    </ComponentWithPageLayout.PageLayout>
-                  )}
-                  {!ComponentWithPageLayout.PageLayout && (
-                    <ComponentWithPageLayout />
-                  )}
+          <SkeletonTheme baseColor="#fff" highlightColor="#ffdda0">
+            <NextPrograssBar color="orange" options={{ showSpinner: false }} />
+            <Container>
+              <ToasterWrapper>
+                <div className="flex w-full gap-2">
+                  <LeftAside />
+                  <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
+                    {ComponentWithPageLayout.PageLayout && (
+                      <ComponentWithPageLayout.PageLayout>
+                        <Component {...pageProps} />
+                      </ComponentWithPageLayout.PageLayout>
+                    )}
+                    {!ComponentWithPageLayout.PageLayout && (
+                      <ComponentWithPageLayout />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </ToasterWrapper>
-          </Container>
+              </ToasterWrapper>
+            </Container>
+          </SkeletonTheme>
         </CartContextProvider>
       </ReduxProvider>
     </SessionProvider>

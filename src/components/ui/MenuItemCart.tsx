@@ -24,6 +24,7 @@ import Image from "next/image";
 import useCart from "~/hooks/useCart";
 import { useState } from "react";
 import { toastSuccess } from "~/helpers/toasters";
+import Skeleton from "react-loading-skeleton";
 
 const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
   const { addItem } = useCart();
@@ -136,4 +137,30 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
     </div>
   );
 };
+
+export const MenuItemCartSkelton = () => {
+  return (
+    <div className="!shadow-xs group relative m-1  mx-auto w-full  max-w-[250px] cursor-pointer rounded-[20px]        p-2    shadow-lg     ">
+      <div className="   flex  min-h-[120px] w-full flex-col items-center  !py-1  !shadow-none ">
+        <Skeleton circle width={110} height={110} />
+      </div>
+      <div className="flex flex flex-col items-center     !pt-4">
+        <span className="font-bold capitalize text-title">
+          <Skeleton />
+        </span>
+      </div>
+      <div className="flex flex flex-col items-center     !py-2">
+        <span className="font-bold capitalize text-primary ">
+          <Skeleton count={3} width={100} />
+        </span>
+      </div>
+      <div className="   flex justify-between ">
+        <div className="flex items-center gap-2"></div>
+
+        <div className="flex justify-center"></div>
+      </div>
+    </div>
+  );
+};
+
 export default MenuItemCart;

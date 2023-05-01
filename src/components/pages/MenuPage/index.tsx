@@ -7,6 +7,7 @@ import HomeMenuItems from "./HomeMenuItems";
 import Cart from "~/components/layout/Cart";
 import Button from "~/components/ui/Button";
 import { MagnifyingGlassIcon as SearchIcon } from "@heroicons/react/24/solid";
+import Skeleton from "react-loading-skeleton";
 
 const MenuPage = () => {
   const [currentCategory, setCurrentCategory] = useState<MenuCategory | null>(
@@ -34,7 +35,11 @@ const MenuPage = () => {
         setCategoryIfNull={setCategoryIfNull}
         handleChangeCategory={handleChangeCategory}
       />
-      {currentCategory && <Title text={`${currentCategory.name} menu`} />}
+      {currentCategory ? (
+        <Title text={`${currentCategory.name} menu`} />
+      ) : (
+        <Skeleton width={100} />
+      )}
       {currentCategory && <HomeMenuItems category={currentCategory} />}
     </section>
   );

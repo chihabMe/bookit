@@ -20,34 +20,9 @@ const HeaderAccount = () => {
   const { data: user, status } = useSession();
   const isLoading = status == "loading";
   const isAuth = status == "authenticated";
-  const dispatch = useAppDispatch();
-  const { getNumberOfItems } = useCart();
-  const windowSize = useWindowSize();
-  const router = useRouter();
 
-  const toggleCart = () => {
-    if (windowSize.width && windowSize.width < 500) {
-      router
-        .push("/cart")
-        .then()
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      dispatch(uiActions.toggleCart());
-    }
-  };
   return (
     <div className="flex  items-center gap-4 ">
-      <Button
-        onClick={toggleCart}
-        className=" relative cursor-pointer !bg-transparent px-2 py-2 text-text"
-      >
-        <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
-        <span className="absolute right-[5px] top-[10px] flex h-5 w-5 items-center justify-center rounded-full bg-primary   text-[9px] font-bold text-white  ">
-          {getNumberOfItems()}
-        </span>
-      </Button>
       {!isLoading && isAuth && <AuthenticatedUserView />}
       {!isLoading && !isAuth && <UnAuthenticatedUserView />}
     </div>
