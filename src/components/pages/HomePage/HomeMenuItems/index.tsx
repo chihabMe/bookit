@@ -19,11 +19,7 @@ const HomeMenuItems = ({ category }: Props) => {
   if (isError || !menuItems) return <h1>{error?.message}</h1>;
 
   return (
-    <div
-      className={`grid  w-full grid-cols-1 flex-wrap  place-items-center gap-2   py-2  sm:grid-cols-2 md:grid-cols-3 ${
-        showCart ? "" : "lg:grid-cols-4"
-      } `}
-    >
+    <div className={`flex flex-wrap justify-center gap-4 sm:justify-start`}>
       {menuItems.items.map((item) => (
         <MenuItemCart key={item.id} item={item} />
       ))}

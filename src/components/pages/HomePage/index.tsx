@@ -21,10 +21,10 @@ const HomePage = () => {
   return (
     <section className="w-full">
       <div className="my-2 w-full px-2">
-        <form className="jusitfy-between flex w-full max-w-[800px] rounded-full bg-orange-50  px-2 outline-1   outline-primary group-focus:outline  group-focus:outline-2">
-          <input className="group h-12 w-full bg-transparent px-4  font-medium   capitalize text-title text-title outline-none" />
-          <Button className="m-0 flex w-24 items-center justify-center rounded-full">
-            <SearchIcon className="h-6 w-6 text-white " />
+        <form className="flex w-full max-w-[800px] justify-between rounded-full bg-orange-50 hover:outline    hover:outline-2 ">
+          <input className="  h-12 w-full bg-transparent px-4 px-4  font-medium   capitalize text-title text-title outline-none" />
+          <Button className="w-18  m-0 flex items-center justify-center rounded-full md:w-24">
+            <SearchIcon className="h-5 w-5 text-white md:h-6 md:w-6  " />
           </Button>
         </form>
       </div>
