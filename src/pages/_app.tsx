@@ -14,6 +14,7 @@ import { AppProps } from "next/dist/shared/lib/router/router";
 import { ReactNode } from "react";
 import store from "~/store";
 import ToasterWrapper from "~/components/wrappers/ToasterWrapper";
+import NextPrograssBar from "nextjs-progressbar";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
   PageLayout?: React.ComponentType<{ children: ReactNode }>;
@@ -28,6 +29,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <ReduxProvider store={store}>
         <CartContextProvider>
+          <NextPrograssBar color="orange" options={{ showSpinner: false }} />
           <Container>
             <ToasterWrapper position="bottom-right">
               <div className="flex w-full gap-2">

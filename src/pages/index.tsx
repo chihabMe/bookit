@@ -30,14 +30,16 @@ const Home = () => {
               </p>
             </div>
             <div className="mt-8 flex gap-8">
-              <Button className=" animate-pluse h-12 rounded-lg px-8 capitalize text-white !shadow-md shadow">
-                order now
-              </Button>
-              <div className="group flex   items-center gap-4">
+              <Link href="/menu">
+                <Button className=" animate-pluse h-12 rounded-lg px-8 capitalize text-white !shadow-md shadow">
+                  order now
+                </Button>
+              </Link>
+              <Link href="/book">
                 <Button className="flex flex  h-12 items-center rounded-lg !bg-transparent capitalize text-text   hover:text-primary hover:ring-2 hover:ring-primary">
                   book a place
                 </Button>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
