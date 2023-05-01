@@ -13,6 +13,7 @@ import LeftAside from "~/components/layout/LeftAside";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import { ReactNode } from "react";
 import store from "~/store";
+import ToasterWrapper from "~/components/wrappers/ToasterWrapper";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
   PageLayout?: React.ComponentType<{ children: ReactNode }>;
@@ -28,20 +29,22 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <ReduxProvider store={store}>
         <CartContextProvider>
           <Container>
-            <div className="flex w-full gap-2">
-              <LeftAside />
-              <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
-                <Header />
-                {ComponentWithPageLayout.PageLayout && (
-                  <ComponentWithPageLayout.PageLayout>
-                    <Component {...pageProps} />
-                  </ComponentWithPageLayout.PageLayout>
-                )}
-                {!ComponentWithPageLayout.PageLayout && (
-                  <ComponentWithPageLayout />
-                )}
+            <ToasterWrapper position="bottom-right">
+              <div className="flex w-full gap-2">
+                <LeftAside />
+                <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
+                  <Header />
+                  {ComponentWithPageLayout.PageLayout && (
+                    <ComponentWithPageLayout.PageLayout>
+                      <Component {...pageProps} />
+                    </ComponentWithPageLayout.PageLayout>
+                  )}
+                  {!ComponentWithPageLayout.PageLayout && (
+                    <ComponentWithPageLayout />
+                  )}
+                </div>
               </div>
-            </div>
+            </ToasterWrapper>
           </Container>
         </CartContextProvider>
       </ReduxProvider>

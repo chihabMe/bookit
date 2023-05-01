@@ -3,7 +3,7 @@ import HeaderAccount from "./HeaderAccount";
 import Button from "~/components/ui/Button";
 const Header = () => {
   return (
-    <header className="relative flex w-full items-center justify-between px-2 py-4 md:px-0 ">
+    <header className="relative    flex w-full items-center justify-between bg-bg-light px-2  py-4 dark:bg-bg-dark md:px-0 ">
       <div>
         <h1 className="text-2xl font-bold md:text-3xl">
           Book<span className="text-primary">it</span>

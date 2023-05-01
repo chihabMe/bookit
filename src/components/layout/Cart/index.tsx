@@ -8,22 +8,34 @@ const Cart = () => {
   return (
     <aside className="w-full">
       <Title text="order menu" />
-      <ul className="flex  max-h-[250px] min-h-[245px] flex-col gap-2  overflow-y-scroll   py-4  md:max-h-[350px]   md:min-h-[345px]">
+      <ul className="flex  max-h-[230px] min-h-[235px] flex-col gap-2  overflow-y-scroll   py-4  md:max-h-[310px]   md:min-h-[305px]">
         {items.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </ul>
-      <div className="flex w-full justify-end justify-between gap-2 px-2">
-        <span className="dark:text-title:dark font-bold text-title md:text-xl">
-          {getNumberOfItems()} items
+      <hr className=" my-2 h-px border-0 bg-gray-400 dark:bg-gray-700" />
+      <div className="flex w-full  justify-end justify-between gap-2 py-2 ">
+        <span className=" dark:text-title:dark font-bold capitalize text-title md:text-xl">
+          total
         </span>
         <span className="dark:text-title:dark font-bold text-title md:text-xl">
-          Total ${getTotal().toFixed(2)}
+          ${getTotal().toFixed(2)}
         </span>
       </div>
-      <Button className="my-8 h-14 w-full rounded-full py-2 text-[15px] font-bold capitalize text-white transition-all  duration-200 hover:ring-2 hover:ring-primary">
-        checkout
-      </Button>
+
+      <div className="flex w-full justify-end justify-between gap-2 py-2  capitalize">
+        <span className="dark:text-title:dark font-bold text-title md:text-xl">
+          items
+        </span>
+        <span className="dark:text-title:dark font-bold text-title md:text-xl">
+          {getNumberOfItems()}
+        </span>
+      </div>
+      <div className="flex w-full items-center">
+        <Button className="mx-auto my-8 h-[50px] w-full max-w-[350px] rounded-full py-2 text-[15px] font-bold capitalize text-white transition-all  duration-200 hover:ring-2 hover:ring-primary">
+          confirm order
+        </Button>
+      </div>
     </aside>
   );
 };

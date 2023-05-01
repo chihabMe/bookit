@@ -5,8 +5,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import MenuItemCart from "~/components/ui/MenuItemCart";
-import HomePage from "~/components/pages/HomePage";
 import CartLayout from "~/components/layout/CartLayout";
+import Button from "~/components/ui/Button";
 
 const Home = () => {
   return (
@@ -16,7 +16,31 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        <HomePage />
+        <section className=" mx-auto mt-[60px] w-full max-w-[1000px]">
+          <div className="flex w-[400px] flex-col gap-[8px] text-5xl font-bold capitalize text-text dark:text-text-dark">
+            <h1>the fastest</h1>
+            <h1>delevery</h1>
+            <h1 className="text-primary">in your city</h1>
+
+            <div className="py-4">
+              <p className="text-xs font-medium text-text dark:text-text-dark">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                end of text
+              </p>
+            </div>
+            <div className="mt-8 flex gap-8">
+              <Button className=" animate-pluse h-12 rounded-lg px-8 capitalize text-white !shadow-md shadow">
+                order now
+              </Button>
+              <div className="group flex   items-center gap-4">
+                <Button className="flex flex  h-12 items-center rounded-lg !bg-transparent capitalize text-text   hover:text-primary hover:ring-2 hover:ring-primary">
+                  book a place
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

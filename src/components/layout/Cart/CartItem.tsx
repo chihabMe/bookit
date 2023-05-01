@@ -9,12 +9,24 @@ import {
 import Button from "~/components/ui/Button";
 import useAppDispatch from "~/hooks/useAppDispatch";
 import useCart from "~/hooks/useCart";
+import { toastSuccess } from "~/helpers/toasters";
 
 const CartItem = ({ item }: { item: ICartItem }) => {
   const { increaseItem, decreaseItem, removeItem, getTotal } = useCart();
-  const increaseCartItem = () => increaseItem(item.id);
-  const dcreaseCartItem = () => decreaseItem(item.id);
-  const handleDeleteItemFromCart = () => removeItem(item.id);
+  const increaseCartItem = () => {
+    increaseItem(item.id);
+    toastSuccess({ message: "added to cart" });
+  };
+  const dcreaseCartItem = () => {
+    decreaseItem(item.id);
+    toastSuccess({ message: "removed from cart " });
+  };
+  const handleDeleteItemFromCart = () => {
+    removeItem(item.id);
+    toastSuccess({
+      message: "cleared from cart ",
+    });
+  };
 
   return (
     <li className=" flex items-center  justify-between gap-2  overflow-x-hidden py-2">

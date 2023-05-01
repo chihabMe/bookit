@@ -23,6 +23,7 @@ import Button from "./Button";
 import Image from "next/image";
 import useCart from "~/hooks/useCart";
 import { useState } from "react";
+import { toastSuccess } from "~/helpers/toasters";
 
 const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
   const { addItem } = useCart();
@@ -85,13 +86,13 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
     stars.push(<StarIcon className="h-3 w-3 text-primary" />);
   }
   const addToCartHandler = () => {
-    console.log("add op <=>");
     addItem({ ...item, quantity: 1 });
+    toastSuccess({ message: "added to cart" });
   };
   const [liked, setLiked] = useState(false);
   const handleLikeClick = () => setLiked((prev) => !prev);
   return (
-    <div className="!shadow-xs group relative !w-[200px] w-full  max-w-[26rem] cursor-pointer   rounded-[20px]     p-2    shadow-lg     ">
+    <div className="!shadow-xs group relative m-1  mx-auto w-full  max-w-[250px] cursor-pointer rounded-[20px]        p-2    shadow-lg     ">
       <div className="   flex  min-h-[120px] w-full flex-col items-center  !py-1  !shadow-none ">
         <Button
           onClick={handleLikeClick}
