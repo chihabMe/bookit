@@ -28,10 +28,10 @@ export default withMT({
 
         "bg-light": "#fff",
         "bg-dark": "#1C1B22",
-        text: "383838",
+        text: "#383838",
         title: "#141414",
-        "text-dark": "939393",
-        "title-dark": "e2e2e2",
+        "text-dark": "#939393",
+        "title-dark": "#e2e2e2",
       },
     },
   },

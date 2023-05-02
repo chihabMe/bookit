@@ -57,7 +57,9 @@ const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
         />
       </div>
       <div className="flex flex flex-col flex-col    !pt-2">
-        <span className="font-bold capitalize text-title">{item.name}</span>
+        <span className="font-bold capitalize text-title dark:text-title-dark">
+          {item.name}
+        </span>
       </div>
       <div className="   pt-0 ">
         <div className="flex justify-between">
@@ -111,7 +113,9 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
         />
       </div>
       <div className="flex flex flex-col items-center     !pt-4">
-        <span className="font-bold capitalize text-title">{item.name}</span>
+        <span className="font-bold capitalize text-title dark:text-title-dark">
+          {item.name}
+        </span>
       </div>
       <div className="flex flex flex-col items-center     !py-2">
         <span className="font-bold capitalize text-primary ">
@@ -121,7 +125,9 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
       <div className="   flex justify-between ">
         <div className="flex items-center gap-2">
           <StarIcon className="h-4 w-4 text-primary" />
-          <span className=" text-sm font-bold text-title">{4.5}</span>
+          <span className=" text-sm font-bold text-title dark:text-title-dark">
+            {4.5}
+          </span>
         </div>
 
         <div className="flex justify-center">

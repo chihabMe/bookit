@@ -56,7 +56,7 @@ const LeftAside = () => {
           <Button
             onClick={toggleCart}
             className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
-        !text-gray-700 text-text transition-all duration-100 hover:!bg-primary hover:!text-white 
+        !text-text  transition-all duration-100 hover:!bg-primary hover:!text-white dark:!text-title-dark 
           "
           >
             <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
@@ -113,7 +113,9 @@ const LeftAsideItem = ({ Icon, href }: { Icon: ReactNode; href: string }) => {
       <Link href={href}>
         <Button
           className={`!rounded-full !p-4 transition-all duration-100 hover:!bg-primary hover:!text-white  ${
-            isActive ? "!bg-primary" : "!bg-transparent !text-gray-700"
+            isActive
+              ? "!bg-primary"
+              : "!bg-transparent !text-text dark:!text-title-dark"
           }  `}
         >
           {Icon}
