@@ -20,6 +20,7 @@ import { ThemeProvider } from "next-themes";
 import "react-loading-skeleton/dist/skeleton.css";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
+  hideAside?: boolean;
   PageLayout?: React.ComponentType<{ children: ReactNode }>;
 };
 
@@ -38,7 +39,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
               <Container>
                 <ToasterWrapper>
                   <div className="flex w-full gap-2">
-                    <LeftAside />
+                    {!ComponentWithPageLayout.hideAside && <LeftAside />}
                     <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
                       {ComponentWithPageLayout.PageLayout && (
                         <ComponentWithPageLayout.PageLayout>

@@ -10,7 +10,7 @@ const Button = ({ children, size, variant, className, onClick }: Props) => {
     <MTButton
       size={size}
       variant={variant}
-      className={`  !bg-primary !text-text !shadow-none  !shadow-primary ${className!} `}
+      className={`  !bg-primary !text-white !shadow-none  !shadow-primary ${className!} `}
       onClick={onClick}
     >
       {children}
