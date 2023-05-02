@@ -47,7 +47,7 @@ const LeftAside = () => {
   };
   return (
     <aside
-      className="fixed bottom-0 left-0 right-0 z-50 flex w-full  bg-bg-light px-4 py-4 dark:bg-bg-dark md:static md:z-50 md:block md:h-full md:w-[100px] 
+      className="fixed bottom-0 left-0 right-0 z-50 flex w-full bg-bg-light bg-bg-light  px-4 py-4 dark:bg-bg-dark  md:static md:z-50 md:block md:h-full md:w-[100px] 
 "
     >
       <ul className="mx-auto flex gap-4 md:flex-col">

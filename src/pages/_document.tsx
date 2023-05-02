@@ -10,7 +10,7 @@ const Docuemnt = () => {
         <meta name="author" content="John Doe" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <body className="bg-light dark:bg-dark">
+      <body className="bg-bg-light dark:bg-bg-dark">
         <NextScript />
         <Main />
       </body>
