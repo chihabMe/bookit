@@ -3,10 +3,11 @@ import withMT from "@material-tailwind/react/utils/withMT";
 
 export default withMT({
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       screens: {
-        sm: "540px",
+        sm: "440px",
         // => @media (min-width: 640px) { ... }
 
         md: "768px",

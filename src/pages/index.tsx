@@ -8,6 +8,7 @@ import MenuItemCart from "~/components/ui/MenuItemCart";
 import CartLayout from "~/components/layout/CartLayout";
 import Button from "~/components/ui/Button";
 import Header from "~/components/layout/Header";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -18,8 +19,8 @@ const Home = () => {
       </Head>
       <main className="">
         <Header />
-        <section className=" mx-auto mt-[60px] w-full max-w-[1000px]">
-          <div className="flex w-[400px] flex-col gap-[8px] text-5xl font-bold capitalize text-text dark:text-text-dark">
+        <section className=" mx-auto mt-[30px] flex w-full max-w-[1000px] flex-col items-center justify-between md:flex-row">
+          <div className="flex w-[400px] flex-col gap-[8px] text-3xl font-bold capitalize text-text dark:text-text-dark sm:text-4xl md:text-5xl">
             <h1>the fastest</h1>
             <h1>delevery</h1>
             <h1 className="text-primary">in your city</h1>
@@ -28,21 +29,28 @@ const Home = () => {
               <p className="text-xs font-medium text-text dark:text-text-dark">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                end of text
               </p>
             </div>
-            <div className="mt-8 flex gap-8">
+            <div className="mt-8 flex items-center  gap-8">
               <Link href="/menu">
-                <Button className=" animate-pluse h-12 rounded-lg px-8 capitalize text-white !shadow-md shadow">
+                <Button className=" animate-pluse h-12 rounded-full  px-8 capitalize text-white !shadow-md shadow hover:ring-2 hover:ring-primary">
                   order now
                 </Button>
               </Link>
               <Link href="/book">
-                <Button className="flex flex  h-12 items-center rounded-lg !bg-transparent capitalize text-text   hover:text-primary hover:ring-2 hover:ring-primary">
+                <Button className="flex flex h-12  items-center rounded-full  !bg-transparent capitalize text-text   hover:text-primary hover:ring-2 hover:ring-primary">
                   book a place
                 </Button>
               </Link>
             </div>
+          </div>
+          <div className="hidden md:block">
+            <Image
+              alt="delevery man"
+              width={450}
+              height={450}
+              src="/images/delevery.png"
+            />
           </div>
         </section>
       </main>

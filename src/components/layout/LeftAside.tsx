@@ -4,6 +4,8 @@ import {
   ChatBubbleOvalLeftIcon,
   Cog6ToothIcon,
   UserIcon,
+  MoonIcon,
+  SunIcon,
   ShoppingBagIcon,
   ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
@@ -17,6 +19,7 @@ import { useSession } from "next-auth/react";
 import useAppDispatch from "~/hooks/useAppDispatch";
 import useWindowSize from "~/hooks/useWindowSize";
 import { uiActions } from "~/store/slices/ui.slice";
+import ThemeToggler from "../ui/ThemeToggler";
 
 const LeftAside = () => {
   const { data: user, status } = useSession();
@@ -39,7 +42,6 @@ const LeftAside = () => {
           console.error(err);
         });
     } else {
-      console.log("open open");
       dispatch(uiActions.toggleCart());
     }
   };
@@ -65,6 +67,9 @@ const LeftAside = () => {
         </li>
         {!isLoading && isAuth && <AuthenticatedView />}
         {!isLoading && !isAuth && <UnAuthenticatedView />}
+        <li className="">
+          <ThemeToggler />
+        </li>
       </ul>
     </aside>
   );
@@ -103,7 +108,6 @@ const UnAuthenticatedView = () => {
 const LeftAsideItem = ({ Icon, href }: { Icon: ReactNode; href: string }) => {
   const router = useRouter();
   const isActive = router.pathname == href;
-  console.log(isActive);
   return (
     <li>
       <Link href={href}>

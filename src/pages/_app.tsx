@@ -16,6 +16,7 @@ import store from "~/store";
 import ToasterWrapper from "~/components/wrappers/ToasterWrapper";
 import NextPrograssBar from "nextjs-progressbar";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { ThemeProvider } from "next-themes";
 import "react-loading-skeleton/dist/skeleton.css";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
@@ -33,23 +34,25 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <CartContextProvider>
           <SkeletonTheme baseColor="#fff" highlightColor="#ffdda0">
             <NextPrograssBar color="orange" options={{ showSpinner: false }} />
-            <Container>
-              <ToasterWrapper>
-                <div className="flex w-full gap-2">
-                  <LeftAside />
-                  <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
-                    {ComponentWithPageLayout.PageLayout && (
-                      <ComponentWithPageLayout.PageLayout>
-                        <Component {...pageProps} />
-                      </ComponentWithPageLayout.PageLayout>
-                    )}
-                    {!ComponentWithPageLayout.PageLayout && (
-                      <ComponentWithPageLayout />
-                    )}
+            <ThemeProvider attribute="class">
+              <Container>
+                <ToasterWrapper>
+                  <div className="flex w-full gap-2">
+                    <LeftAside />
+                    <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
+                      {ComponentWithPageLayout.PageLayout && (
+                        <ComponentWithPageLayout.PageLayout>
+                          <Component {...pageProps} />
+                        </ComponentWithPageLayout.PageLayout>
+                      )}
+                      {!ComponentWithPageLayout.PageLayout && (
+                        <ComponentWithPageLayout />
+                      )}
+                    </div>
                   </div>
-                </div>
-              </ToasterWrapper>
-            </Container>
+                </ToasterWrapper>
+              </Container>
+            </ThemeProvider>
           </SkeletonTheme>
         </CartContextProvider>
       </ReduxProvider>

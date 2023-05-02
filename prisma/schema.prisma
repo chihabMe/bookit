@@ -48,12 +48,14 @@ model User {
   email          String?       @unique
   emailVerified  DateTime?
   role           UserRoles     @default(customer)
-  image          String? @db.Text
+  image          String?       @db.Text
   accounts       Account[]
   sessions       Session[]
   addedMenuItems MenuItem[]
   orders         Order[]
   BookedPlace    BookedPlace[]
+  Reservation    Reservation[]
+  Table          Table[]
 }
 
 model VerificationToken {
@@ -70,7 +72,7 @@ model VerificationToken {
 model MenuCategory {
   id        String   @id @default(uuid())
   name      String
-  image     String @db.Text
+  image     String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
@@ -81,7 +83,7 @@ model MenuItem {
   id             String          @id @default(uuid())
   name           String
   price          Decimal
-  description    String @db.Text
+  description    String          @db.Text
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @default(now()) @updatedAt
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -89,7 +91,7 @@ model MenuItem {
   available      Boolean         @default(true)
   numberOfItems  Int             @default(10)
   category       MenuCategory    @relation(fields: [menuCategoryId], references: [id], onDelete: Cascade)
-  image          String? @db.Text
+  image          String?         @db.Text
   images         MenuItemImage[]
   menuCategoryId String
 }
@@ -136,4 +138,37 @@ model BookedPlace {
   userId        String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
+}
+
+enum ReservationHours {
+  TWO_POINT_FIVE
+  THREE
+  THREE_POINT_FIVE
+  FOUR
+  FOUR_POINT_FIVE
+  FIVE
+  FIVE_POINT_FIVE
+}
+
+model Table {
+  id          String        @id
+  user        User          @relation(fields: [userId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+  number      Int
+  userId      String
+  Reservation Reservation[]
+  booked      Boolean       @default(false)
+}
+
+model Reservation {
+  id            String           @id @default(uuid())
+  date          DateTime         @default(now())
+  user          User             @relation(fields: [userId], references: [id])
+  userId        String
+  table         Table            @relation(fields: [tableId], references: [id])
+  tableId       String
+  numberOfHours ReservationHours @default(TWO_POINT_FIVE)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now()) @updatedAt
 }
