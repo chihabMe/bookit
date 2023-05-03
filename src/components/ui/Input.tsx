@@ -14,7 +14,7 @@ const Input = ({ className, placeholder, icon, type }: Props) => {
         type={type}
         icon={icon}
         color="orange"
-        className={` focus:!ring-primary ${className!}`}
+        className={` text-title focus:!ring-primary dark:text-title-dark  ${className!} `}
       />
     </div>
   );
