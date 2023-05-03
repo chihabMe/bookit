@@ -55,7 +55,7 @@ const UnAuthenticatedUserView = () => {
   return (
     <div className="flex gap-4">
       <Link href="/auth/login">
-        <Button className="h-12 rounded-full  !bg-transparent px-8 capitalize !text-text text-title hover:!text-primary hover:!text-primary hover:ring-2 hover:ring-primary ">
+        <Button className="h-12 rounded-full !bg-transparent px-8  capitalize !text-text !text-title text-title hover:!text-primary hover:!text-primary hover:ring-2 hover:ring-primary dark:!text-title-dark ">
           sign in
         </Button>
       </Link>

@@ -15,7 +15,7 @@ const Cart = () => {
       </ul>
       <hr className=" my-2 h-px border-0 bg-gray-400 dark:bg-gray-700" />
       <div className="flex w-full  justify-end justify-between gap-2 py-2 ">
-        <span className=" dark:text-title:dark font-bold capitalize text-title md:text-xl">
+        <span className=" dark:text-title:dark font-bold capitalize text-title dark:text-title-dark  md:text-xl">
           total
         </span>
         <span className="dark:text-title:dark font-bold text-title dark:text-title-dark md:text-xl">
@@ -24,10 +24,10 @@ const Cart = () => {
       </div>
 
       <div className="flex w-full justify-end justify-between gap-2 py-2  capitalize">
-        <span className="dark:text-title:dark font-bold text-title md:text-xl">
+        <span className="dark:text-title:dark font-bold text-title dark:text-title-dark md:text-xl ">
           items
         </span>
-        <span className="dark:text-title:dark font-bold text-title dark:text-title-dark md:text-xl">
+        <span className="dark:text-title:dark font-bold text-title dark:text-title-dark md:text-xl ">
           {getNumberOfItems()}
         </span>
       </div>
