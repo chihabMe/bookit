@@ -17,28 +17,28 @@ const Home = () => {
         <title>bookit </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
+      <main className=" w-full px-4">
         <Header />
-        <section className=" mx-auto mt-[30px] flex w-full max-w-[1000px] flex-col items-center justify-between md:flex-row">
-          <div className="flex w-[400px] flex-col gap-[8px] text-3xl font-bold capitalize text-text dark:text-text-dark sm:text-4xl md:text-5xl">
+        <section className=" mx-auto mt-[30px] flex w-full max-w-[1000px]     md:flex-row md:justify-between">
+          <div className="flex w-[400px] flex-col gap-[8px] text-2xl font-bold capitalize text-text dark:text-text-dark sm:text-4xl md:text-5xl">
             <h1>the fastest</h1>
             <h1>delevery</h1>
             <h1 className="text-primary">in your city</h1>
 
             <div className="py-4">
-              <p className="text-xs font-medium text-text dark:text-text-dark">
+              <p className="w-[250px] text-xs font-medium text-text dark:text-text-dark">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               </p>
             </div>
-            <div className="mt-8 flex items-center  gap-8">
+            <div className="mt-8 flex items-center  gap-8 ">
               <Link href="/menu">
                 <Button className=" animate-pluse h-12 rounded-full  px-8 capitalize text-white !shadow-md shadow hover:ring-2 hover:ring-primary">
                   order now
                 </Button>
               </Link>
               <Link href="/book">
-                <Button className="flex flex h-12  items-center rounded-full  !bg-transparent capitalize text-text   hover:text-primary hover:ring-2 hover:ring-primary">
+                <Button className="  h-12 items-center  rounded-full !bg-transparent  capitalize !text-text  hover:!text-primary  hover:text-primary hover:ring-2   hover:ring-primary active:ring-1 dark:!text-text-dark">
                   book a place
                 </Button>
               </Link>

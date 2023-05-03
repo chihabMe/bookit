@@ -16,6 +16,7 @@ import { uiActions } from "~/store/slices/ui.slice";
 import { useSession } from "next-auth/react";
 import { ChangeEvent } from "react";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
 const HeaderAccount = () => {
   const { data: user, status } = useSession();
   const isLoading = status == "loading";
@@ -23,11 +24,22 @@ const HeaderAccount = () => {
 
   return (
     <div className="flex  items-center gap-4 ">
+      {isLoading && <AuthStelaton />}
       {!isLoading && isAuth && <AuthenticatedUserView />}
       {!isLoading && !isAuth && <UnAuthenticatedUserView />}
     </div>
   );
 };
+
+const AuthStelaton = () => {
+  return (
+    <div className="flex gap-4">
+      <Skeleton width={80} height={40} />
+      <Skeleton width={80} height={40} />
+    </div>
+  );
+};
+
 const AuthenticatedUserView = () => {
   return (
     <Button className=" flex  cursor-pointer items-center gap-3 !bg-transparent px-2 py-2 !capitalize   text-text  ">
@@ -43,13 +55,15 @@ const UnAuthenticatedUserView = () => {
   return (
     <div className="flex gap-4">
       <Link href="/auth/login">
-        <Button className="h-12 rounded-full !bg-transparent px-8 capitalize text-title hover:!text-primary hover:ring-2 hover:ring-primary ">
+        <Button className="h-12 rounded-full  !bg-transparent px-8 capitalize !text-text text-title hover:!text-primary hover:!text-primary hover:ring-2 hover:ring-primary ">
           sign in
         </Button>
       </Link>
 
       <Link href="/auth/register">
-        <Button className="h-12 rounded-full px-8 capitalize">sign up</Button>
+        <Button className="h-12 rounded-full px-8 capitalize hover:ring-2 hover:ring-primary active:ring-1  dark:text-text-dark">
+          sign up
+        </Button>
       </Link>
     </div>
   );
