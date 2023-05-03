@@ -29,13 +29,13 @@ const CartItem = ({ item }: { item: ICartItem }) => {
   };
 
   return (
-    <li className=" flex items-center  justify-between gap-2  overflow-x-hidden py-2">
+    <li className=" flex shrink-0 items-center  justify-between gap-2  overflow-x-hidden rounded-2xl  px-4  py-4">
       <Image
         src={"https://picsum.photos/100/100"}
         alt={`${item.name} image`}
         width={80}
         height={80}
-        className=" h-[50px] w-[50px] rounded-full md:h-[60px] md:w-[60px]"
+        className=" h-[50px] w-[50px] rounded-full md:h-[70px] md:w-[70px]"
       />
       <div className="flex ">
         <div className="   flex w-full min-w-[170px] flex-col gap-2 md:min-w-[220px] ">
@@ -43,37 +43,36 @@ const CartItem = ({ item }: { item: ICartItem }) => {
             {item.name}
           </span>
 
-          <div className="flex gap-2 ">
-            <Button
-              onClick={increaseCartItem}
-              className="!bg-primary !p-1 hover:!bg-primary  hover:ring-1  hover:ring-primary"
-            >
-              <ChevronUpIcon className="h-4  w-4 text-primary  text-white " />
-            </Button>
-            <span className="min-w-[20px]  text-sm font-bold text-title">
-              {item.quantity}
+          <div>
+            <span className="  font-bold text-title dark:text-title-dark">
+              ${(parseFloat(item.price.toString()) * item.quantity).toFixed(2)}
             </span>
-            <Button
-              onClick={dcreaseCartItem}
-              className="!bg-primary !p-1   hover:ring-1  hover:ring-primary"
-            >
-              <ChevronDownIcon className="h-4  w-4 text-primary  text-white " />
-            </Button>
-            <Button
-              onClick={handleDeleteItemFromCart}
-              className="mx-2 !bg-red-300 !p-1   hover:ring-1  hover:ring-red-300"
-            >
-              <TrashIcon className="h-4 w-4 text-white" />
-            </Button>
           </div>
         </div>
       </div>
       <div className="flex min-w-[80px] gap-1  ">
-        <div>
-          <span className="font-bold text-primary">$ </span>
-          <span className="  font-bold text-title">
-            {(parseFloat(item.price.toString()) * item.quantity).toFixed(2)}
+        <div className="flex gap-2  ">
+          <Button
+            onClick={increaseCartItem}
+            className="!bg-primary  !p-1 hover:!bg-primary  hover:ring-1  hover:ring-primary"
+          >
+            <ChevronUpIcon className="h-4  w-4 text-primary  text-white " />
+          </Button>
+          <span className=" min-w-[20px]   text-center text-sm font-bold text-title dark:text-title-dark">
+            {item.quantity}
           </span>
+          <Button
+            onClick={dcreaseCartItem}
+            className="!bg-primary !p-1   hover:ring-1  hover:ring-primary"
+          >
+            <ChevronDownIcon className="h-4  w-4 text-primary  text-white " />
+          </Button>
+          <Button
+            onClick={handleDeleteItemFromCart}
+            className="mx-2 !bg-red-300 !p-1   hover:ring-1  hover:ring-red-300"
+          >
+            <TrashIcon className="h-4 w-4 text-white" />
+          </Button>
         </div>
       </div>
     </li>

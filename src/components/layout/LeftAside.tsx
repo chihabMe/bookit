@@ -33,7 +33,7 @@ const LeftAside = () => {
   const toggleCart = () => {
     if (
       (windowSize.width && windowSize.width < 500) ||
-      router.pathname == "/"
+      router.pathname != "/menu"
     ) {
       router
         .push("/cart")

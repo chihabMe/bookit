@@ -17,9 +17,9 @@ const Home = () => {
         <title>bookit </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className=" w-full px-4">
-        <Header />
-        <section className=" mx-auto mt-[30px] flex w-full max-w-[1000px]     md:flex-row md:justify-between">
+      <Header />
+      <main className=" mt-[50px]  flex w-full px-4    md:mt-0">
+        <section className=" -center  mx-auto   mt-[30px] flex w-full max-w-[1000px]     md:flex-row md:justify-between">
           <div className="flex w-[400px] flex-col gap-[8px] text-2xl font-bold capitalize text-text dark:text-text-dark sm:text-4xl md:text-5xl">
             <h1>the fastest</h1>
             <h1>delevery</h1>
