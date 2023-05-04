@@ -1,7 +1,7 @@
 import Trpc from "~/pages/api/trpc/[trpc]";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { ZodError, z } from "zod";
-import { TRPCError } from "@trpc/server";
+import { TRPCError, getTRPCErrorFromUnknown } from "@trpc/server";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
@@ -27,17 +27,20 @@ export const authRouter = createTRPCRouter({
       });
       console.log(isUsedEmail);
       if (isUsedEmail) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "invalid fields",
-          cause: [{ email: "used email" }],
-        });
+        return {
+          success: false,
+          errors: { email: ["This email is being used"] },
+          message: "invalid email",
+        };
       }
       await ctx.prisma.user.create({
         data: {
           email: input.email,
         },
       });
-      return "hi";
+      return {
+        success: true,
+        message: "registred",
+      };
     }),
 });

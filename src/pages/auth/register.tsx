@@ -35,9 +35,11 @@ const LoginPage = () => {
       {}
     );
   };
-  const fieldErrors = error?.data?.zodError?.fieldErrors;
 
-  console.log("errors", error?.data);
+  const errors: Record<string, any> | undefined =
+    error?.data?.zodError?.fieldErrors ?? data?.errors;
+
+  console.log("errors", error);
   console.log("loading", isLoading);
   console.log("is error", isError);
   return (
@@ -58,12 +60,12 @@ const LoginPage = () => {
               onChange={handleChange}
               icon={<EnvelopeIcon className="h-4 w-4" />}
               className="!h-12 rounded-lg "
-              errors={fieldErrors ? fieldErrors["email"] : undefined}
+              errors={errors ? errors["email"] : undefined}
             />
             <Input
               placeholder="Password"
               name="password"
-              errors={fieldErrors ? fieldErrors["password"] : undefined}
+              errors={errors ? errors["password"] : undefined}
               onChange={handleChange}
               type="password"
               icon={<LockClosedIcon className="h-4 w-4" />}
@@ -74,7 +76,7 @@ const LoginPage = () => {
               placeholder="Passwod Confirmation"
               type="password"
               name="rePassword"
-              errors={fieldErrors ? fieldErrors["rePassword"] : undefined}
+              errors={errors ? errors["rePassword"] : undefined}
               onChange={handleChange}
               icon={<LockClosedIcon className="h-4 w-4" />}
               className="!h-12 rounded-lg "
