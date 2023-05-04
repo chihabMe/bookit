@@ -3,7 +3,6 @@ import { Button as MTButton, type ButtonProps } from "@material-tailwind/react";
 
 interface Props extends ButtonProps {
   className?: string;
-  type?: string;
 }
 
 const Button = ({

@@ -19,7 +19,7 @@ export const MenuSearchBar = () => {
           onBlur={handleBlur}
           placeholder="search..."
           className={`  h-12  ${
-            isFocused ? "w-full" : "  w-[400px]  "
+            isFocused ? "w-full" : "w-[200px]  md:w-[400px]  "
           }    bg-transparent px-4 px-4 font-medium capitalize text-title   text-title outline-none transition-all duration-300 dark:text-title-dark`}
         />
         <Button className="w-18  m-0 flex items-center justify-center rounded-full transition-all duration-300 md:w-24">

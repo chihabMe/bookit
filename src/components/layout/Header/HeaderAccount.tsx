@@ -17,13 +17,24 @@ import { useSession } from "next-auth/react";
 import { ChangeEvent } from "react";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
+import ThemeToggler from "~/components/ui/ThemeToggler";
 const HeaderAccount = () => {
   const { data: user, status } = useSession();
   const isLoading = status == "loading";
   const isAuth = status == "authenticated";
+  const { getNumberOfItems } = useCart();
 
   return (
-    <div className="flex  items-center gap-4 ">
+    <div className="flex  items-center gap-4  ">
+      <ThemeToggler rclassName="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-4 capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark    dark:!text-title-dark " />
+      <Link href="/cart">
+        <Button className="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-4 capitalize !text-text !text-title text-title hover:!text-primary   dark:!text-title-dark ">
+          <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
+          <span className="absolute right-[5px] top-[10px] flex h-5 w-5 items-center justify-center rounded-full bg-primary   text-[9px] font-bold text-white  ">
+            {getNumberOfItems()}
+          </span>
+        </Button>
+      </Link>
       {isLoading && <AuthStelaton />}
       {!isLoading && isAuth && <AuthenticatedUserView />}
       {!isLoading && !isAuth && <UnAuthenticatedUserView />}
@@ -34,8 +45,8 @@ const HeaderAccount = () => {
 const AuthStelaton = () => {
   return (
     <div className="flex gap-4">
-      <Skeleton width={80} height={40} />
-      <Skeleton width={80} height={40} />
+      <Skeleton width={95} height={40} />
+      <Skeleton width={95} height={40} />
     </div>
   );
 };

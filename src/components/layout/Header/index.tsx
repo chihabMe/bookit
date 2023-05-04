@@ -1,9 +1,15 @@
-import { MagnifyingGlassIcon, Bars3Icon } from "@heroicons/react/24/solid";
+import {
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  ShoppingBagIcon,
+} from "@heroicons/react/24/solid";
 import HeaderAccount from "./HeaderAccount";
 import Button from "~/components/ui/Button";
+import Link from "next/link";
+import useCart from "~/hooks/useCart";
 const Header = () => {
   return (
-    <header className="relative    flex w-full items-center justify-between bg-bg-light px-2  py-4 dark:bg-bg-dark md:px-0 ">
+    <header className="relative  mx-auto   flex w-full max-w-[1200px] items-center justify-between bg-bg-light px-2 px-2  py-4 dark:bg-bg-dark md:px-0 ">
       <div>
         <h1 className="text-2xl font-bold md:text-3xl">
           Book<span className="text-primary">it</span>
