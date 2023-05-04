@@ -57,6 +57,7 @@ model User {
   BookedPlace    BookedPlace[]
   Reservation    Reservation[]
   Table          Table[]
+  password String?
 }
 
 model VerificationToken {

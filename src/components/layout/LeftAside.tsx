@@ -4,6 +4,7 @@ import {
   ChatBubbleOvalLeftIcon,
   Cog6ToothIcon,
   UserIcon,
+  ArrowDownCircleIcon as LogoutIcon,
   MoonIcon,
   SunIcon,
   ShoppingBagIcon,
@@ -15,7 +16,7 @@ import Link from "next/link";
 import Button from "../ui/Button";
 import { useRouter } from "next/router";
 import useCart from "~/hooks/useCart";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import useAppDispatch from "~/hooks/useAppDispatch";
 import useWindowSize from "~/hooks/useWindowSize";
 import { uiActions } from "~/store/slices/ui.slice";
@@ -69,6 +70,16 @@ const LeftAside = () => {
         {!isLoading && !isAuth && <UnAuthenticatedView />}
         <li className="">
           <ThemeToggler />
+        </li>
+
+        <li>
+          <Button
+            className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
+        !text-text  transition-all duration-100 hover:!bg-primary hover:!text-white dark:!text-title-dark 
+          "
+          >
+            <LogoutIcon onClick={signOut} className="h-6 w-6 md:h-8 md:w-8 " />
+          </Button>
         </li>
       </ul>
     </aside>

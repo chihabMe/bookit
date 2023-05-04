@@ -2,6 +2,7 @@ import Trpc from "~/pages/api/trpc/[trpc]";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { ZodError, z } from "zod";
 import { TRPCError, getTRPCErrorFromUnknown } from "@trpc/server";
+import { hash } from "~/helpers/auth";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
@@ -33,9 +34,11 @@ export const authRouter = createTRPCRouter({
           message: "invalid email",
         };
       }
+      const password = await hash(input.password);
       await ctx.prisma.user.create({
         data: {
           email: input.email,
+          password,
         },
       });
       return {

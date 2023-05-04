@@ -3,9 +3,11 @@ import Image from "next/image";
 import Button from "~/components/ui/Button";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import Input from "~/components/ui/Input";
+import { toastSuccess } from "~/helpers/toasters";
+import { useRouter } from "next/router";
 const initialState = {
   email: "",
   password: "",
@@ -16,6 +18,7 @@ const LoginPage = () => {
     data,
     isLoading,
     isError,
+    isSuccess,
     error,
     mutate: register,
   } = api.auth.register.useMutation();
@@ -35,13 +38,19 @@ const LoginPage = () => {
       {}
     );
   };
+  const router = useRouter();
 
-  const errors: Record<string, any> | undefined =
+  const errors: Record<string, string[] | undefined> | undefined =
     error?.data?.zodError?.fieldErrors ?? data?.errors;
 
-  console.log("errors", error);
-  console.log("loading", isLoading);
-  console.log("is error", isError);
+  useEffect(() => {
+    if (isSuccess && data.success) {
+      toastSuccess({
+        message: "registered successfully",
+      });
+      router.push("/auth/login").catch((err) => console.error(err));
+    }
+  });
   return (
     <>
       <Head>
