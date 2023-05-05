@@ -58,7 +58,7 @@ const Home = () => {
   );
 };
 
-Home.hideAside = true;
+//Home.hideAside = true;
 export default Home;
 
 const AuthShowcase: React.FC = () => {

@@ -1,14 +1,10 @@
 import {
   HomeIcon,
   HeartIcon,
-  ChatBubbleOvalLeftIcon,
   Cog6ToothIcon,
   UserIcon,
   ArrowDownCircleIcon as LogoutIcon,
-  MoonIcon,
-  SunIcon,
   ShoppingBagIcon,
-  ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
@@ -30,6 +26,7 @@ const LeftAside = () => {
   const { getNumberOfItems } = useCart();
   const windowSize = useWindowSize();
   const router = useRouter();
+  const hideAside = router.pathname == "/";
 
   const toggleCart = () => {
     if (
@@ -48,17 +45,23 @@ const LeftAside = () => {
   };
   return (
     <aside
-      className="fixed bottom-0 left-0 right-0 z-50 flex w-full bg-bg-light bg-bg-light  px-4 py-4 dark:bg-bg-dark  md:static md:z-50 md:block md:h-full md:w-[100px] 
-"
+      className={` ${
+        hideAside ? "md:!hidden" : ""
+      } fixed bottom-0 left-0 right-0 z-50 flex w-full bg-bg-light bg-bg-light  px-4 py-4 dark:bg-bg-dark  md:static md:z-50 md:block md:h-full md:w-[100px] 
+`}
     >
-      <ul className="mx-auto flex gap-4 md:flex-col">
-        <LeftAsideItem href="/" Icon={<HomeIcon className="h-8 w-8" />} />
+      <ul className="mx-auto flex gap-0 md:flex-col">
+        <LeftAsideItem
+          href="/"
+          Icon={<HomeIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+        />
         <li>
           <Button
             onClick={toggleCart}
-            className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
+            className={` 
+relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
         !text-text  transition-all duration-100 hover:!bg-primary hover:!text-white dark:!text-title-dark 
-          "
+          `}
           >
             <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
             <span className="absolute right-[5px] top-[10px] flex h-5 w-5 items-center justify-center rounded-full bg-primary   text-[9px] font-bold text-white  ">
@@ -66,23 +69,20 @@ const LeftAside = () => {
             </span>
           </Button>
         </li>
-        {!isLoading && isAuth && <AuthenticatedView />}
-        {!isLoading && !isAuth && <UnAuthenticatedView />}
+        <LeftAsideItem
+          href="/profile"
+          Icon={<UserIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+        />
         <li className="">
           <ThemeToggler />
         </li>
 
-        <li>
-          <Link href="/auth/logout">
-            <Button
-              className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
-        !text-text  transition-all duration-100 hover:!bg-primary hover:!text-white dark:!text-title-dark 
-          "
-            >
-              <LogoutIcon className="h-6 w-6 md:h-8 md:w-8 " />
-            </Button>
-          </Link>
-        </li>
+        <LeftAsideItem
+          href="/profile/favorite"
+          Icon={<HeartIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+        />
+        {!isLoading && !isAuth && <UnAuthenticatedView />}
+        {!isLoading && isAuth && <AuthenticatedView />}
       </ul>
     </aside>
   );
@@ -91,32 +91,28 @@ const LeftAside = () => {
 const AuthenticatedView = () => {
   return (
     <>
-      <LeftAsideItem
-        href="/profile/messages"
-        Icon={<ChatBubbleOvalLeftIcon className="h-8 w-8" />}
-      />
-      <LeftAsideItem href="/profile" Icon={<UserIcon className="h-8 w-8" />} />
-      <LeftAsideItem
-        href="/profile/favorite"
-        Icon={<HeartIcon className="h-8 w-8" />}
-      />
+      <li>
+        <Link href="/auth/logout">
+          <Button
+            className="  relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
+        !text-red-400   transition-all  duration-100   
+          "
+          >
+            <ArrowLeftOnRectangleIcon className="h-6 w-6 md:h-8 md:w-8 " />
+          </Button>
+        </Link>
+      </li>
+
       <LeftAsideItem
         href="/profile/settings"
-        Icon={<Cog6ToothIcon className="h-8 w-8" />}
+        Icon={<Cog6ToothIcon className="h-6 w-6 md:h-8 md:w-8 " />}
       />
     </>
   );
 };
 
 const UnAuthenticatedView = () => {
-  return (
-    <>
-      <LeftAsideItem
-        href="/auth/login"
-        Icon={<ArrowRightOnRectangleIcon className="h-8 w-8" />}
-      />
-    </>
-  );
+  return <></>;
 };
 const LeftAsideItem = ({ Icon, href }: { Icon: ReactNode; href: string }) => {
   const router = useRouter();

@@ -33,8 +33,7 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(form);
     const resposne = await signIn("credentials", {
-      redirect: true,
-      callbackUrl: "/",
+      redirect: false,
 
       email: form.email,
       password: form.password,
@@ -43,6 +42,7 @@ const LoginPage = () => {
       toastSuccess({
         message: "logged in successfully",
       });
+      router.push("/").catch((err) => console.log(err));
     }
     if (resposne?.error) setIsError(true);
   };

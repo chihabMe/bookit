@@ -26,14 +26,22 @@ import {
 const HeaderAccount = () => {
   const { data: user, status } = useSession();
   const isLoading = status == "loading";
+  const router = useRouter();
   const isAuth = status == "authenticated";
   const { getNumberOfItems } = useCart();
+  const hideButtons = router.pathname == "/";
 
   return (
     <div className="flex  items-center gap-4  ">
-      <ThemeToggler rclassName="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-1 md:px-4 capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark    dark:!text-title-dark " />
-      <Link href="/cart">
-        <Button className="  relative flex h-12 items-center justify-center rounded-full !bg-transparent px-1  capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark   md:px-4 ">
+      <ThemeToggler
+        rclassName={` ${
+          hideButtons ? "md:!flex !hidden" : ""
+        }  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-1 md:px-4 capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark    dark:!text-title-dark `}
+      />
+      <Link href="/cart" className={`${hideButtons ? "!hidden md:!flex" : ""}`}>
+        <Button
+          className={`   relative flex h-12 items-center justify-center rounded-full !bg-transparent px-1  capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark   md:px-4 `}
+        >
           <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
           <span className="absolute right-[5px] top-[10px] flex h-5 w-5 items-center justify-center rounded-full bg-primary   text-[9px] font-bold text-white  ">
             {getNumberOfItems()}
