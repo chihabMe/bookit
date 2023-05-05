@@ -1,7 +1,7 @@
-import { toast, Toaster, ToastOptions } from "react-hot-toast";
+import { Toast, toast, Toaster, ToastOptions } from "react-hot-toast";
 export const toastSuccess = ({
   message,
-  ...rest
+  rest,
 }: {
   message: string;
   rest?: ToastOptions;
@@ -11,10 +11,10 @@ export const toastSuccess = ({
   });
 export const toastError = ({
   message,
-  ...rest
+  rest,
 }: {
   message: string;
-  res?: ToastOptions;
+  rest?: ToastOptions;
 }) =>
   toast.error(message, {
     duration: 4000,

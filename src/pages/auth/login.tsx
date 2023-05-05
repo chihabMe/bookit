@@ -50,10 +50,10 @@ const LoginPage = () => {
   // useEffect(() => {
   //   // if (isAuth) router.push("/").catch((err) => console.log(err));
   // }, [isAuth]);
-  // 
+  //
   return (
-    <Header/>
     <>
+      <Header />
       <Head>
         <title>login page</title>
       </Head>
