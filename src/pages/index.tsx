@@ -58,7 +58,7 @@ const Home = () => {
             />
           </div>
         </section>
-        <section className="flex min-h-screen w-full flex-col-reverse items-start    lg:flex-row lg:items-center  lg:justify-between">
+        <section className="flex min-h-screen w-full flex-col-reverse items-start    py-8 lg:flex-row  lg:items-center lg:justify-between">
           <div>
             <h1 className="py-4 text-4xl font-bold text-title dark:text-title-dark">
               Everything you
@@ -87,7 +87,7 @@ const Home = () => {
             className="   rounded-md md:!h-[370px]  md:!w-[600px] lg:!h-[500px] lg:!w-[700px] "
           />
         </section>
-        <section className="flex min-h-screen w-full flex-col items-start    lg:flex-row lg:items-center  lg:justify-between">
+        <section className="flex min-h-screen w-full flex-col items-start    py-8 lg:flex-row  lg:items-center lg:justify-between">
           <Image
             alt="food image"
             width={800}
