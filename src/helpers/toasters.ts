@@ -1,22 +1,20 @@
-import { toast, Toaster, ToastPosition } from "react-hot-toast";
+import { toast, Toaster, ToastOptions } from "react-hot-toast";
 export const toastSuccess = ({
   message,
   ...rest
 }: {
   message: string;
-  res?: ToastPosition;
+  rest?: ToastOptions;
 }) =>
   toast.success(message, {
-    duration: 1000,
     ...rest,
   });
-
 export const toastError = ({
   message,
   ...rest
 }: {
   message: string;
-  res?: ToastPosition;
+  res?: ToastOptions;
 }) =>
   toast.error(message, {
     duration: 4000,

@@ -18,6 +18,7 @@ import NextPrograssBar from "nextjs-progressbar";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { ThemeProvider } from "next-themes";
 import "react-loading-skeleton/dist/skeleton.css";
+import Footer from "~/components/layout/Footer";
 
 type IComponentWithPageLayout = AppProps["Component"] & {
   hideAside?: boolean;
@@ -40,19 +41,18 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <ToasterWrapper>
                   <div className="flex w-full gap-2">
                     {!ComponentWithPageLayout.hideAside && <LeftAside />}
-                    <div className=" scrollbar-hide  max-h-screen w-full overflow-y-scroll px-2 pb-[160px] md:py-2">
-                      {ComponentWithPageLayout.PageLayout && (
-                        <ComponentWithPageLayout.PageLayout>
-                          <Component {...pageProps} />
-                        </ComponentWithPageLayout.PageLayout>
-                      )}
-                      {!ComponentWithPageLayout.PageLayout && (
-                        <ComponentWithPageLayout />
-                      )}
-                    </div>
+                    {ComponentWithPageLayout.PageLayout && (
+                      <ComponentWithPageLayout.PageLayout>
+                        <Component {...pageProps} />
+                      </ComponentWithPageLayout.PageLayout>
+                    )}
+                    {!ComponentWithPageLayout.PageLayout && (
+                      <ComponentWithPageLayout />
+                    )}
                   </div>
                 </ToasterWrapper>
               </Container>
+              <Footer />
             </ThemeProvider>
           </SkeletonTheme>
         </CartContextProvider>

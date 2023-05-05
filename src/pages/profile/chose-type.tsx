@@ -29,8 +29,27 @@ const ProfileChoseType = () => {
   };
   useEffect(() => {
     if (!isLoading && isSuccess) {
-      toastSuccess({ message: `registred as a ${userType}` });
-      router.push("/").catch((err) => console.error(err));
+      toastSuccess({
+        message: `registred as a ${userType}`,
+        rest: {
+          duration: 4000,
+        },
+      });
+      toastSuccess({
+        message: `you need to login again`,
+        rest: {
+          duration: 4000,
+        },
+      });
+      toastSuccess({
+        message: `you will be redirected after 3s`,
+        rest: {
+          duration: 4000,
+        },
+      });
+      setTimeout(() => {
+        router.push("/auth/logout").catch((err) => console.error(err));
+      }, 3000);
     }
     if (!isLoading && isError) {
       toastError({

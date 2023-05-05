@@ -10,8 +10,10 @@ const MenuPage = () => {
       <Head>
         <title>menu page</title>
       </Head>
-      <main>
-        <Menu />
+      <main className=" min-h-screen w-full   w-full max-w-[1100px] overflow-y-scroll px-2 pb-[160px] md:py-2">
+        <div>
+          <Menu />
+        </div>
       </main>
     </>
   );

@@ -26,7 +26,8 @@ const LeftAside = () => {
   const { getNumberOfItems } = useCart();
   const windowSize = useWindowSize();
   const router = useRouter();
-  const hideAside = router.pathname == "/";
+  const hideAside =
+    router.pathname == "/" || router.pathname.startsWith("/auth");
 
   const toggleCart = () => {
     if (

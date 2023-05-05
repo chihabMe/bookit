@@ -10,10 +10,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 import { compare } from "~/helpers/auth";
-import { debug } from "console";
-import { signIn } from "next-auth/react";
-import { DefaultJWT } from "next-auth/jwt";
-import { User, UserRoles } from "@prisma/client";
+import { type UserRoles } from "@prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -69,6 +66,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: ({ session, user, token }) => {
+      console.log("---sessxion--");
       const returnedSession = {
         ...session,
         user: {
@@ -85,6 +83,7 @@ export const authOptions: NextAuthOptions = {
   },
 
   adapter: PrismaAdapter(prisma),
+
   pages: {
     signIn: "/auth/login",
     signOut: "/auth/logout",

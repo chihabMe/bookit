@@ -8,6 +8,7 @@ import { api } from "~/utils/api";
 import Input from "~/components/ui/Input";
 import { toastSuccess } from "~/helpers/toasters";
 import { useRouter } from "next/router";
+import Header from "~/components/layout/Header";
 const initialState = {
   email: "",
   password: "",
@@ -53,6 +54,7 @@ const LoginPage = () => {
   });
   return (
     <>
+      <Header />
       <Head>
         <title>login page</title>
       </Head>

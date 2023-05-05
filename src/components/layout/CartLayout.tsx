@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const CartLayout = ({ children }: { children: ReactNode }) => {
   const { showCart } = useAppSelector(selectUI);
   return (
-    <div className="flex justify-between gap-1   ">
+    <div className="flex w-full max-w-[100%] justify-between gap-1  ">
       <div className="scrollbar-hide max-h-screen w-full overflow-y-scroll px-4 transition-all  duration-200">
         {children}
       </div>

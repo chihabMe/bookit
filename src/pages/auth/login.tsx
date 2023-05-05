@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import Input from "~/components/ui/Input";
 import { toastSuccess } from "~/helpers/toasters";
 import { HandleThunkActionCreator } from "react-redux";
+import Header from "~/components/layout/Header";
 const initialState = {
   email: "",
   password: "",
@@ -49,7 +50,9 @@ const LoginPage = () => {
   // useEffect(() => {
   //   // if (isAuth) router.push("/").catch((err) => console.log(err));
   // }, [isAuth]);
+  // 
   return (
+    <Header/>
     <>
       <Head>
         <title>login page</title>

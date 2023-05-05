@@ -7,7 +7,9 @@ import HeaderAccount from "./HeaderAccount";
 import Button from "~/components/ui/Button";
 import Link from "next/link";
 import useCart from "~/hooks/useCart";
+import { useSession } from "next-auth/react";
 const Header = () => {
+  const { data } = useSession();
   return (
     <header className="  mx-auto   flex w-full max-w-[1200px] items-center justify-between bg-bg-light px-2 px-2  py-4 dark:bg-bg-dark md:px-0 ">
       <div>
