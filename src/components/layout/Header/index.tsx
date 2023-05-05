@@ -9,7 +9,7 @@ import Link from "next/link";
 import useCart from "~/hooks/useCart";
 const Header = () => {
   return (
-    <header className="relative  mx-auto   flex w-full max-w-[1200px] items-center justify-between bg-bg-light px-2 px-2  py-4 dark:bg-bg-dark md:px-0 ">
+    <header className="  mx-auto   flex w-full max-w-[1200px] items-center justify-between bg-bg-light px-2 px-2  py-4 dark:bg-bg-dark md:px-0 ">
       <div>
         <h1 className="text-2xl font-bold md:text-3xl">
           Book<span className="text-primary">it</span>
