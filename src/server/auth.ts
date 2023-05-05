@@ -22,6 +22,9 @@ import { User, UserRoles } from "@prisma/client";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
+  interface User {
+    role: UserRoles;
+  }
   interface Session extends DefaultSession {
     user: {
       id: string;
@@ -37,6 +40,14 @@ declare module "next-auth" {
   //   // role: UserRole;
   // }
 }
+declare module "next-auth/jwt" {
+  interface JWT {
+    user: {
+      role: UserRoles;
+      id: string;
+    };
+  }
+}
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
@@ -46,19 +57,39 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: ({ account, token, user, profile, session, trigger }) => {
+      // //@ts-ignore
+      // token.user = user;
+      console.log("-----------f it jwt-------------");
+      console.log("user>", user);
+      console.log("account>", account);
+      console.log("profile", profile);
+      if (user) {
+        token.user = { role: user.role, id: user.id };
+      }
       return token;
     },
     session: ({ session, user, token }) => {
-      return {
+      const returnedSession = {
         ...session,
         user: {
+          ...token.user,
           ...session.user,
         },
       };
+      console.log(returnedSession);
+
+      // //@ts-ignore
+      // if (!returnedSession.user.id) returnedSession.user.id = token.user.id;
+      return returnedSession;
     },
   },
 
   adapter: PrismaAdapter(prisma),
+  pages: {
+    signIn: "/auth/login",
+    signOut: "/auth/logout",
+    newUser: "/auth/register",
+  },
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,

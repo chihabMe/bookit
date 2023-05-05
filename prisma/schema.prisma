@@ -48,7 +48,7 @@ model User {
   name           String?
   email          String?       @unique
   emailVerified  DateTime?
-  role           UserRoles     @default(customer)
+  role           UserRoles
   image          String?       @db.Text
   accounts       Account[]
   sessions       Session[]

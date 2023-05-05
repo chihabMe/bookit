@@ -102,11 +102,6 @@ const AuthenticatedView = () => {
           </Button>
         </Link>
       </li>
-
-      <LeftAsideItem
-        href="/profile/settings"
-        Icon={<Cog6ToothIcon className="h-6 w-6 md:h-8 md:w-8 " />}
-      />
     </>
   );
 };

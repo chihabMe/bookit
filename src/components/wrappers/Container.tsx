@@ -1,7 +1,22 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { ReactNode } from "react";
+import Spinner from "../ui/Spinner";
+import { useRouter } from "next/router";
 
 const Container = ({ children }: { children: ReactNode }) => {
+  const { status, data: user } = useSession();
+  const router = useRouter();
+  const isInProfileChoseType = router.pathname == "/profile/chose-type";
+  if (status == "loading")
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  if (!isInProfileChoseType && user && !user.user.role) {
+    router.push("/profile/chose-type").catch((err) => console.log(err));
+  }
   return (
     <>
       <Head>

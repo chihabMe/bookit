@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import CartLayout from "~/components/layout/CartLayout";
 import Header from "~/components/layout/Header";
