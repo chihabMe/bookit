@@ -73,13 +73,15 @@ const LeftAside = () => {
         </li>
 
         <li>
-          <Button
-            className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
+          <Link href="/auth/logout">
+            <Button
+              className=" relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
         !text-text  transition-all duration-100 hover:!bg-primary hover:!text-white dark:!text-title-dark 
           "
-          >
-            <LogoutIcon onClick={signOut} className="h-6 w-6 md:h-8 md:w-8 " />
-          </Button>
+            >
+              <LogoutIcon className="h-6 w-6 md:h-8 md:w-8 " />
+            </Button>
+          </Link>
         </li>
       </ul>
     </aside>

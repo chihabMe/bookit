@@ -31,9 +31,9 @@ const HeaderAccount = () => {
 
   return (
     <div className="flex  items-center gap-4  ">
-      <ThemeToggler rclassName="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-4 capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark    dark:!text-title-dark " />
+      <ThemeToggler rclassName="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-1 md:px-4 capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark    dark:!text-title-dark " />
       <Link href="/cart">
-        <Button className="  relative flex h-12 items-center justify-center rounded-full !bg-transparent  px-4 capitalize !text-text !text-title text-title hover:!text-primary   dark:!text-title-dark ">
+        <Button className="  relative flex h-12 items-center justify-center rounded-full !bg-transparent px-1  capitalize !text-text !text-title text-title hover:!text-primary dark:!text-title-dark   md:px-4 ">
           <ShoppingBagIcon className="h-6 w-6 md:h-8 md:w-8 " />
           <span className="absolute right-[5px] top-[10px] flex h-5 w-5 items-center justify-center rounded-full bg-primary   text-[9px] font-bold text-white  ">
             {getNumberOfItems()}
@@ -63,11 +63,11 @@ const AuthenticatedUserView = () => {
         {({ open }) => (
           <div>
             <Menu.Button>
-              <Button className=" flex  cursor-pointer items-center gap-3 !bg-transparent px-2 py-2 !capitalize   text-text  ">
-                <UserIcon className=" h-6 w-6    text-text md:h-8  md:w-8  " />
+              <Button className=" flex  cursor-pointer items-center gap-3 !bg-transparent px-2 py-2 !capitalize   !text-title dark:!text-title-dark  ">
+                <UserIcon className=" h-6 w-6     md:h-8  md:w-8  " />
                 <div className="flex items-center gap-2 text-xs font-medium ">
                   <ChevronDownIcon
-                    className={`h-4 w-4 text-text ${
+                    className={`h-4 w-4  ${
                       open ? "rotate-180" : ""
                     } transition-all duration-200`}
                   />
@@ -86,7 +86,7 @@ const AuthenticatedUserView = () => {
             >
               <Menu.Items
                 as="ul"
-                className="absolute right-0 mt-2 w-[220px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="transparent  absolute right-0 mt-2 w-[220px] origin-top-right divide-y divide-gray-100 rounded-md bg-bg-light shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-dark"
               >
                 <div className="flex flex-col gap-1 px-1 py-2 pt-4">
                   <AuthMenuItem href="/profile">
