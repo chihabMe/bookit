@@ -12,6 +12,8 @@ import { prisma } from "~/server/db";
 import { compare } from "~/helpers/auth";
 import { debug } from "console";
 import { signIn } from "next-auth/react";
+import { DefaultJWT } from "next-auth/jwt";
+import { User, UserRoles } from "@prisma/client";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -23,6 +25,8 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      role: UserRoles;
+
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -42,27 +46,13 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: ({ account, token, user, profile, session, trigger }) => {
-      console.log("account", account);
-      console.log("token", token);
-      console.log("user", user);
-      console.log("profile", profile);
-      console.log("session", session);
-      console.log("trigger", trigger);
-      //@ts-ignore
-      token.user = user;
       return token;
     },
     session: ({ session, user, token }) => {
-      console.log("------session------");
-      console.log("session", session);
-      console.log("user>", user);
-      console.log("token ", token);
       return {
         ...session,
         user: {
           ...session.user,
-          //ts-ignore
-          ...token.user,
         },
       };
     },
