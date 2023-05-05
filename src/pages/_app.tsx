@@ -41,14 +41,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <ToasterWrapper>
                   <div className="flex w-full gap-2">
                     {!ComponentWithPageLayout.hideAside && <LeftAside />}
-                    {ComponentWithPageLayout.PageLayout && (
-                      <ComponentWithPageLayout.PageLayout>
-                        <Component {...pageProps} />
-                      </ComponentWithPageLayout.PageLayout>
-                    )}
-                    {!ComponentWithPageLayout.PageLayout && (
-                      <ComponentWithPageLayout />
-                    )}
+                    <div className="    w-full  px-2 pb-[160px] md:py-2">
+                      {ComponentWithPageLayout.PageLayout && (
+                        <ComponentWithPageLayout.PageLayout>
+                          <Component {...pageProps} />
+                        </ComponentWithPageLayout.PageLayout>
+                      )}
+                      {!ComponentWithPageLayout.PageLayout && (
+                        <ComponentWithPageLayout />
+                      )}
+                    </div>
                   </div>
                 </ToasterWrapper>
               </Container>
