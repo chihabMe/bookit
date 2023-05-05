@@ -4,11 +4,18 @@ import Button from "~/components/ui/Button";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  FormHTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
 import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/router";
 import Input from "~/components/ui/Input";
 import { toastSuccess } from "~/helpers/toasters";
+import { HandleThunkActionCreator } from "react-redux";
 const initialState = {
   email: "",
   password: "",
@@ -22,7 +29,7 @@ const LoginPage = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const router = useRouter();
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     console.log(form);
     const resposne = await signIn("credentials", {
@@ -50,7 +57,9 @@ const LoginPage = () => {
       <main className="flex flex min-h-screen flex-col items-center justify-center pt-[150px]   ">
         <div className="flex w-full max-w-[350px]  flex-col justify-center gap-4  ">
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => {
+              handleSubmit(e).catch((err) => console.log(err));
+            }}
             className="flex w-full flex-col gap-4 py-4"
           >
             <Input
