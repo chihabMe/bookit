@@ -3,6 +3,7 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { ZodError, z } from "zod";
 import { TRPCError, getTRPCErrorFromUnknown } from "@trpc/server";
 import { hash } from "~/helpers/auth";
+import { UserRoles } from "@prisma/client";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
@@ -35,12 +36,14 @@ export const authRouter = createTRPCRouter({
         };
       }
       const password = await hash(input.password);
-      await ctx.prisma.user.create({
+      const user = await ctx.prisma.user.create({
         data: {
           email: input.email,
           password,
+          role: UserRoles.none,
         },
       });
+      console.log(user);
       return {
         success: true,
         message: "registred",

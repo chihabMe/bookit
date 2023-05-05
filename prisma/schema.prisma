@@ -41,6 +41,7 @@ enum UserRoles {
   admin
   customer
   restaurant
+  none
 
 }
 model User {
@@ -48,7 +49,7 @@ model User {
   name           String?
   email          String?       @unique
   emailVerified  DateTime?
-  role           UserRoles
+  role           UserRoles @default(none)
   image          String?       @db.Text
   accounts       Account[]
   sessions       Session[]
@@ -58,6 +59,9 @@ model User {
   Reservation    Reservation[]
   Table          Table[]
   password String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model VerificationToken {

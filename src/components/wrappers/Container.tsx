@@ -3,6 +3,7 @@ import Head from "next/head";
 import { ReactNode } from "react";
 import Spinner from "../ui/Spinner";
 import { useRouter } from "next/router";
+import { UserRoles } from "@prisma/client";
 
 const Container = ({ children }: { children: ReactNode }) => {
   const { status, data: user } = useSession();
@@ -14,7 +15,12 @@ const Container = ({ children }: { children: ReactNode }) => {
         <Spinner />
       </div>
     );
-  if (!isInProfileChoseType && user && !user.user.role) {
+  if (
+    !isInProfileChoseType &&
+    user &&
+    user.user.role &&
+    user.user.role == UserRoles.none
+  ) {
     router.push("/profile/chose-type").catch((err) => console.log(err));
   }
   return (
