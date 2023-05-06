@@ -6,8 +6,10 @@ import ProfileReservations from "~/components/pages/ProfilePage/ProfileReservati
 const ProfilePage = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 px-2 md:flex-row  ">
-      <ProfileInfos />
-      <div className="flex flex-col justify-center gap-4">
+      <div className="min-h-[400px]">
+        <ProfileInfos />
+      </div>
+      <div className="flex min-h-[400px]  flex-col  gap-4 ">
         <ProfileOrders />
         <ProfileReservations />
       </div>

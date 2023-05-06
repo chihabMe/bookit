@@ -3,8 +3,9 @@ import { useSession } from "next-auth/react";
 import Spinner from "~/components/ui/Spinner";
 import Button from "~/components/ui/Button";
 import { api } from "~/utils/api";
-import { Order, Restaurant } from "@prisma/client";
+import { Order, OrderStatus, Restaurant } from "@prisma/client";
 import RestaurantReservations from "./ProfileReservations";
+import Skeleton from "react-loading-skeleton";
 
 interface OrderWithRestarutn extends Order {
   restaurnat: Restaurant;
@@ -18,13 +19,7 @@ const ProfileOrders = () => {
     error,
   } = api.ordres.getLast4orders.useQuery();
 
-  if (isLoading)
-    return (
-      <div className="h-700px flex w-full items-center justify-center rounded-full bg-bg-light dark:bg-bg-dark">
-        <Spinner />
-      </div>
-    );
-  if (isError || !orders) {
+  if ((!isLoading && isError) || (!isLoading && !orders)) {
     return (
       <div className="flex w-full max-w-[500px] flex-col items-center justify-center gap-2">
         <h1 className="text-red-500">{error?.message}</h1>
@@ -51,9 +46,9 @@ const ProfileOrders = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {orders.map((order) => (
-            <OrderItem key={order.id} order={order} />
-          ))}
+          {!isLoading &&
+            orders.map((order) => <OrderItem key={order.id} order={order} />)}
+          {isLoading && <OrdersSkelaton />}
         </tbody>
       </table>
     </div>
@@ -85,4 +80,29 @@ const OrderItem = ({ order }: { order: OrderItemProps }) => {
   );
 };
 
+const OrdersSkelaton = () => {
+  return (
+    <>
+      <OrderItemSkelaton />
+      <OrderItemSkelaton />
+      <OrderItemSkelaton />
+      <OrderItemSkelaton />
+    </>
+  );
+};
+const OrderItemSkelaton = () => {
+  return (
+    <tr>
+      <td className="px-2 py-1 text-sm font-medium text-text dark:text-text-dark">
+        <Skeleton width={70} />
+      </td>
+      <td className="px-2 py-1 text-sm font-medium text-text dark:text-text-dark">
+        <Skeleton width={70} />
+      </td>
+      <td className="px-2 py-1">
+        <Skeleton width={70} />
+      </td>
+    </tr>
+  );
+};
 export default ProfileOrders;
