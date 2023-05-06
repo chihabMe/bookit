@@ -2,14 +2,26 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Button from "~/components/ui/Button";
 import Spinner from "~/components/ui/Spinner";
+import { api } from "~/utils/api";
 
 const ProfileInfos = () => {
-  const { status, data } = useSession();
+  const {
+    isLoading,
+    isError,
+    data: profile,
+    error,
+  } = api.profile.getProfile.useQuery();
 
-  if (status == "loading")
+  if (isLoading)
     return (
       <div className="h-700px flex w-[300px] items-center justify-center rounded-full bg-bg-light dark:bg-bg-dark">
         <Spinner />
+      </div>
+    );
+  if (!profile)
+    return (
+      <div className="h-700px flex w-[300px] items-center justify-center rounded-full bg-bg-light dark:bg-bg-dark">
+        <h1 className="text-red-400">{error.message}</h1>
       </div>
     );
   return (
@@ -19,27 +31,27 @@ const ProfileInfos = () => {
       </h1>
       <div className="flex w-full justify-center">
         <Image
-          width={340}
-          height={340}
+          width={300}
+          height={300}
           alt="profile image"
-          src="/images/pages/home/image1.jpg"
-          className=" rounded-lg"
+          src={profile.image ?? `/images/pages/home/image1.jpg`}
+          className=" rounded-xl"
         />
       </div>
       <h1 className="font-bold text-title dark:text-title-dark ">chihab</h1>
       <div className="flex flex-col  text-sm font-medium text-title dark:text-title-dark  ">
         <div className="flex w-full justify-between">
           <h2 className="py-2">Email</h2>
-          <h2 className="py-2">{data?.user.email}</h2>
+          <h2 className="py-2">{profile.email}</h2>
         </div>
 
         <div className="flex w-full justify-between">
           <h2 className="py-2">Phone Number</h2>
-          <h2 className="py-2">2133252332</h2>
+          <h2 className="py-2">{profile.phone ?? "None"}</h2>
         </div>
         <div className="flex w-full justify-between">
           <h2 className="py-2">location</h2>
-          <h2 className="py-2">algeria constantine</h2>
+          <h2 className="py-2">{profile.location ?? "None"} </h2>
         </div>
       </div>
       <Button className="py-2.5 capitalize">edite</Button>

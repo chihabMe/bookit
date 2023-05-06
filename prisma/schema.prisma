@@ -42,15 +42,17 @@ enum UserRoles {
   customer
   restaurant
   none
-
 }
+
 model User {
   id             String        @id @default(cuid())
   name           String?
   email          String?       @unique
   emailVerified  DateTime?
-  role           UserRoles @default(none)
+  role           UserRoles     @default(none)
   image          String?       @db.Text
+  location       String?
+  phone          String?
   accounts       Account[]
   sessions       Session[]
   addedMenuItems MenuItem[]
@@ -58,10 +60,39 @@ model User {
   BookedPlace    BookedPlace[]
   Reservation    Reservation[]
   Table          Table[]
-  password String?
+  password       String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now()) @updatedAt
+  restaurant Restaurant?
+}
+
+model RestaurantImage {
+  url          String
+  id           String     @id
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+}
+
+model Restaurant {
+  id      String  @id @default(cuid())
+  name    String
+  address String?
+  city    String?
+  state   String?
+  zip     String?
+  phone   String?
+  email   String?
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String  @unique
+
+  menuItems   MenuItem[]
+  orders      Order[]
+  images      RestaurantImage[]
+  Table       Table[]
+  Reservation Reservation[]
 }
 
 model VerificationToken {
@@ -100,11 +131,13 @@ model MenuItem {
   image          String?         @db.Text
   images         MenuItemImage[]
   menuCategoryId String
+  restaurant     Restaurant      @relation(fields: [restaurantId], references: [id])
+  restaurantId   String
 }
 
 model MenuItemImage {
   url        String
-  id         String   @id
+  id         String   @id @default(cuid())
   item       MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
   menuItemId String
   createdAt  DateTime @default(now())
@@ -117,6 +150,13 @@ enum OrderPaymentMethods {
   paypel
 }
 
+enum OrderStatus {
+  pending
+  processing
+  delivered
+  canceled
+}
+
 model Order {
   id            String              @id @default(uuid())
   items         OrderItem[]
@@ -125,6 +165,9 @@ model Order {
   orderdBy      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
   paymentMethod OrderPaymentMethods @default(visaCard)
+  status        OrderStatus         @default(pending)
+  restaurant    Restaurant          @relation(fields: [restaurantId], references: [id])
+  restaurantId  String
 }
 
 model OrderItem {
@@ -157,24 +200,33 @@ enum ReservationHours {
 }
 
 model Table {
-  id          String        @id
-  user        User          @relation(fields: [userId], references: [id])
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now()) @updatedAt
-  number      Int
-  userId      String
-  Reservation Reservation[]
-  booked      Boolean       @default(false)
+  id           String        @id
+  user         User          @relation(fields: [userId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
+  number       Int
+  userId       String
+  Reservation  Reservation[]
+  booked       Boolean       @default(false)
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id])
+  restaurantId String
 }
-
+enum ReservationStatus {
+  proccesing
+  canceled
+  completed
+}
 model Reservation {
   id            String           @id @default(uuid())
-  date          DateTime         @default(now())
+  checkIn          DateTime         @default(now())
+  numberOfHours ReservationHours @default(TWO_POINT_FIVE)
   user          User             @relation(fields: [userId], references: [id])
   userId        String
   table         Table            @relation(fields: [tableId], references: [id])
   tableId       String
-  numberOfHours ReservationHours @default(TWO_POINT_FIVE)
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @default(now()) @updatedAt
+  restaurant    Restaurant       @relation(fields: [restaurantId], references: [id])
+  restaurantId  String
+  status ReservationStatus @default(proccesing)
 }
