@@ -50,7 +50,7 @@ const RestaurantReservations = () => {
               key={reservation.id}
               id={reservation.id}
               restaurant={reservation.restaurant}
-              date={reservation.date}
+              checkIn={reservation.checkIn}
               status={reservation.status}
             />
           ))}
@@ -66,25 +66,25 @@ interface ReservationsItemProps extends Reservation {
   };
 }
 const ReservationItem = ({
-  restaurant,
-  date,
-  status,
-}: ReservationsItemProps) => {
+  reservation,
+}: {
+  reservation: ReservationsItemProps;
+}) => {
   return (
     <tr>
       <td className="px-4 py-2 text-xs font-medium text-text dark:text-text-dark ">
-        {restaurant}
+        {reservation.restaurant.name}
       </td>
       <td className="px-4 py-2 text-xs font-medium text-text dark:text-text-dark ">
-        {date}
+        {reservation.checkIn.toISOString()}
       </td>
       <td className="px-4 py-2 text-xs  text-text dark:text-text-dark ">
         <Button
           className={`rounded-full !py-1 ${
-            status == "reserved" ? "!bg-green-500" : ""
+            reservation.status == "completed" ? "!bg-green-500" : ""
           }   rounded-full !px-4 !text-[10px] `}
         >
-          {status}
+          {reservation.status}
         </Button>
       </td>
     </tr>
