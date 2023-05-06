@@ -11,6 +11,7 @@ const Input = ({
   type,
   onChange,
   name,
+  value,
 }: Props) => {
   return (
     <div className=" flex flex-col  gap-2  ">
@@ -20,9 +21,10 @@ const Input = ({
         type={type}
         name={name}
         icon={icon}
+        value={value}
         color="orange"
         error={errors != undefined}
-        className={` text-title focus:!ring-primary dark:text-title-dark  ${className!} `}
+        className={` text-title focus:!ring-primary dark:text-title-dark  ${className!}   `}
       />
       {errors && (
         <div className="flex gap-2 py-2 text-sm font-medium text-red-400">

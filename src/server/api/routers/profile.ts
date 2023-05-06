@@ -38,4 +38,30 @@ export const profileRouter = createTRPCRouter({
       const { password: _, ...userWithoutPassword } = { ...user };
       return userWithoutPassword;
     }),
+  updateProfile: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().nullable(),
+        phone: z.string().nullable(),
+        location: z.string().nullable(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const user = await ctx.prisma.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            phone: input.phone,
+            location: input.location,
+            name: input.name,
+          },
+        });
+        return getUserWihtoutPassword(user);
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
+    }),
 });

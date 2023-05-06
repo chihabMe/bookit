@@ -48,7 +48,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                         </ComponentWithPageLayout.PageLayout>
                       )}
                       {!ComponentWithPageLayout.PageLayout && (
-                        <ComponentWithPageLayout />
+                        <ComponentWithPageLayout {...pageProps} />
                       )}
                     </div>
                   </div>
