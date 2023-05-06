@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Button from "~/components/ui/Button";
 import Spinner from "~/components/ui/Spinner";
 
 const ProfileInfos = () => {
@@ -12,14 +13,19 @@ const ProfileInfos = () => {
       </div>
     );
   return (
-    <div className="h-700px flex w-[300px] flex-col  justify-center gap-4 rounded-full bg-bg-light px-4 shadow-lg  dark:bg-bg-dark">
-      <Image
-        width={300}
-        height={300}
-        alt="profile image"
-        src="/images/pages/home/image1.jpg"
-        className=" rounded-lg"
-      />
+    <div className="flex w-full flex-col justify-center gap-4 rounded-xl bg-bg-light bg-gray-200 px-4 py-2   shadow-lg  dark:bg-bg-dark dark:bg-gray-900  md:w-[350px]">
+      <h1 className="py-2 text-lg font-bold text-title dark:text-title-dark">
+        Profile infos
+      </h1>
+      <div className="flex w-full justify-center">
+        <Image
+          width={340}
+          height={340}
+          alt="profile image"
+          src="/images/pages/home/image1.jpg"
+          className=" rounded-lg"
+        />
+      </div>
       <h1 className="font-bold text-title dark:text-title-dark ">chihab</h1>
       <div className="flex flex-col  text-sm font-medium text-title dark:text-title-dark  ">
         <div className="flex w-full justify-between">
@@ -36,6 +42,7 @@ const ProfileInfos = () => {
           <h2 className="py-2">algeria constantine</h2>
         </div>
       </div>
+      <Button className="py-2.5 capitalize">edite</Button>
     </div>
   );
 };
