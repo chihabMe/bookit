@@ -2,11 +2,11 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 
-const AddMenuItemPage = () => {
+const ReservationsPage = () => {
   return (
     <>
       <Head>
-        <title>add item</title>
+        <title>reservations</title>
       </Head>
       <main>
         <h1>add item</h1>
@@ -37,4 +37,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   }
 };
-export default AddMenuItemPage;
+export default ReservationsPage;
