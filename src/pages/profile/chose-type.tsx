@@ -12,11 +12,10 @@ type Roles = "restaurant" | "customer";
 
 const ProfileChoseType = () => {
   const { data: session } = useSession();
-  const [userType, setUserType] = useState<Roles>("restaurant");
+  const [userType, setUserType] = useState<Roles>("customer");
   const isCustomer = userType == "customer";
   const handleUserChangeType = (type: Roles) => {
     setUserType(type);
-    console.log(type);
   };
   const router = useRouter();
   const { mutate, isLoading, error, isError, isSuccess } =
@@ -106,7 +105,7 @@ const ProfileChoseType = () => {
                 !isCustomer ? "text-white" : "text-title dark:text-title-dark"
               } capitalize`}
             >
-              customer
+              restraurant
             </h1>
           </Button>
         </div>

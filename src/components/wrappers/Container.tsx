@@ -8,7 +8,9 @@ import { UserRoles } from "@prisma/client";
 const Container = ({ children }: { children: ReactNode }) => {
   const { status, data: user } = useSession();
   const router = useRouter();
-  const isInProfileChoseType = router.pathname == "/profile/chose-type";
+  const isInProfileChoseType =
+    router.pathname == "/profile/chose-type" ||
+    router.pathname.startsWith("/auth");
   if (status == "loading")
     return (
       <div className="flex min-h-screen w-full items-center justify-center">
@@ -22,7 +24,13 @@ const Container = ({ children }: { children: ReactNode }) => {
     user.user.role == UserRoles.none
   ) {
     router.push("/profile/chose-type").catch((err) => console.log(err));
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
+
   return (
     <>
       <Head>
