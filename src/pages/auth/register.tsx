@@ -58,7 +58,7 @@ const LoginPage = () => {
       <Head>
         <title>login page</title>
       </Head>
-      <main className="flex flex min-h-screen flex-col items-center justify-center pt-[150px]   ">
+      <main className="flex flex min-h-screen flex-col items-center items-center justify-center justify-center   ">
         <div className="flex w-full max-w-[350px]  flex-col justify-center gap-4  ">
           <form
             onSubmit={handleSubmit}

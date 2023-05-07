@@ -42,7 +42,7 @@ const Home = () => {
                   order now
                 </Button>
               </Link>
-              <Link href="/book">
+              <Link href="/restaurants">
                 <Button className="  h-12 items-center  rounded-full !bg-transparent  capitalize !text-text  hover:!text-primary  hover:text-primary hover:ring-2   hover:ring-primary active:ring-1 dark:!text-text-dark">
                   book a place
                 </Button>
