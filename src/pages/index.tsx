@@ -23,8 +23,8 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className=" mt-[50px] flex  w-full flex-col px-4    md:mt-0 md:mt-[60px] ">
-        <section className="   mx-auto mt-[30px] flex   w-full  w-full max-w-[1100px]   pb-[50px]    md:flex-row md:justify-between">
+      <main className=" mt-[50px] flex  w-full flex-col     px-4 md:mt-0 md:mt-[60px]">
+        <section className="   mx-auto mt-[30px] flex   w-full  w-full max-w-[1100px]       pb-[50px] md:flex-row md:justify-between">
           <div className="flex w-[400px] flex-col gap-[8px] text-2xl font-bold capitalize text-text dark:text-text-dark sm:text-4xl md:text-5xl">
             <h1>the fastest</h1>
             <h1>delevery</h1>

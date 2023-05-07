@@ -2,10 +2,12 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import Button from "./Button";
 import { useTheme } from "next-themes";
 import { toastSuccess } from "~/helpers/toasters";
+import { useRouter } from "next/router";
 interface Props {
   rclassName?: string;
+  iclassName?: string;
 }
-const ThemeToggler = ({ rclassName }: Props) => {
+const ThemeToggler = ({ rclassName, iclassName }: Props) => {
   const { systemTheme, theme, setTheme } = useTheme();
   const isLight = theme == "light";
   const currentTheme = theme == "system" ? systemTheme : theme;
@@ -24,8 +26,12 @@ const ThemeToggler = ({ rclassName }: Props) => {
           `
       }
     >
-      {isLight && <MoonIcon className="h-6 w-6 md:h-8 md:w-8 " />}
-      {!isLight && <SunIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+      {isLight && (
+        <MoonIcon className={`${iclassName!}h-6 w-6 md:h-8 md:w-8 `} />
+      )}
+      {!isLight && (
+        <SunIcon className={`${iclassName!}h-6 w-6 md:h-8 md:w-8 `} />
+      )}
     </Button>
   );
 };

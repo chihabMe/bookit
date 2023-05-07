@@ -1,11 +1,16 @@
 import { type Config } from "tailwindcss";
 import withMT from "@material-tailwind/react/utils/withMT";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default withMT({
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        libre: ['"Libre Baskerville"', ...defaultTheme.fontFamily.sans],
+        roboto: ['"Roboto"', ...defaultTheme.fontFamily.sans],
+      },
       screens: {
         sm: "440px",
         // => @media (min-width: 640px) { ... }
