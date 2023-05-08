@@ -39,7 +39,8 @@ export const menuRouter = createTRPCRouter({
       const id = ctx.session.user.id;
       const user = await findUserById(id, ctx.prisma);
       checkIsAdmin(user);
-      const restaurnats = await ctx.prisma.restaurant.findMany({ take: 1 });
+      const restaurnats = await
+      ctx.prisma.restaurant.findMany({ take: 1 });
       if (!restaurnats || restaurnats.length == 0 || !restaurnats[0])
         throw new TRPCError({
           code: "BAD_REQUEST",

@@ -6,6 +6,7 @@ const RestaurantsSearch = () => {
   if (restaurants.isLoading) return <h1>loading</h1>;
   if (!restaurants.data || restaurants.isError)
     return <h1 className="text-red-400">{restaurants.error.message}</h1>;
+
   return (
     <div className="w-full">
       <ul>
