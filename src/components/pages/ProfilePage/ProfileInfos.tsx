@@ -25,9 +25,6 @@ const ProfileInfos = () => {
     );
   return (
     <div className="flex w-full flex-col justify-center gap-4 rounded-xl bg-bg-light bg-gray-200 px-4 py-2   shadow-lg  dark:bg-bg-dark dark:bg-gray-900  md:w-[350px]">
-      <h1 className="py-2 text-lg font-bold text-title dark:text-title-dark">
-        Profile infos
-      </h1>
       <div className="flex w-full justify-center">
         <ProfileImage image={profile.image} />
       </div>

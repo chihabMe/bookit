@@ -23,6 +23,7 @@ import Footer from "~/components/layout/Footer";
 type IComponentWithPageLayout = AppProps["Component"] & {
   hideAside?: boolean;
   PageLayout?: React.ComponentType<{ children: ReactNode }>;
+  showFooter?: boolean;
 };
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -44,7 +45,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                     <div className="    w-full  px-2 pb-[160px] md:py-2">
                       {ComponentWithPageLayout.PageLayout && (
                         <ComponentWithPageLayout.PageLayout>
-                          <Component {...pageProps} />
+                          <ComponentWithPageLayout {...pageProps} />
                         </ComponentWithPageLayout.PageLayout>
                       )}
                       {!ComponentWithPageLayout.PageLayout && (
@@ -54,7 +55,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                   </div>
                 </ToasterWrapper>
               </Container>
-              <Footer />
+              {ComponentWithPageLayout.showFooter && <Footer />}
             </ThemeProvider>
           </SkeletonTheme>
         </CartContextProvider>

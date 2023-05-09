@@ -58,6 +58,33 @@ const Home = () => {
             />
           </div>
         </section>
+        <section className="flex items-center justify-around  ">
+          <InfoSectionItem
+            alt="delevry man icon"
+            href="/auth/login"
+            image="/images/pages/home/Scoot.svg"
+            text="As a delivery driver, you'll make reliable money—working anytime, anywhere."
+            title="Become a Dasher"
+            btnTxt="Start earning"
+          />
+          <InfoSectionItem
+            alt="store icon"
+            href="/auth/login"
+            image="/images/pages/home/Storefront.svg"
+            text="Grow your business and reach new customers by partnering with us."
+            title="Become a Partner"
+            btnTxt="Sign up your store"
+          />
+
+          <InfoSectionItem
+            alt="phone icon"
+            href="/auth/login"
+            image="/images/pages/home/phone.svg"
+            text="Experience the best your neighborhood has to offer, all in one app."
+            title="Try the App"
+            btnTxt="Get the app"
+          />
+        </section>
         <section className="flex min-h-screen w-full flex-col-reverse items-start    py-8 lg:flex-row  lg:items-center lg:justify-between">
           <div>
             <h1 className="py-4 text-4xl font-bold text-title dark:text-title-dark">
@@ -121,5 +148,37 @@ const Home = () => {
 };
 
 //Home.hideAside = true;
-
+const InfoSectionItem = ({
+  image,
+  alt,
+  title,
+  text,
+  href,
+  btnTxt,
+}: {
+  image: string;
+  alt: string;
+  title: string;
+  text: string;
+  href: string;
+  btnTxt: string;
+}) => {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <Image alt={alt} src={image} width={154} height={154} className="" />
+      <h1 className="text-3xl font-bold text-title dark:text-title-dark">
+        {title}
+      </h1>
+      <p className="w-full max-w-[230px] text-center text-lg text-text dark:text-text-dark">
+        {text}
+      </p>
+      <Link href={href}>
+        <Button className="rounded-full !bg-transparent text-base capitalize  !text-primary hover:!bg-primary hover:!text-white">
+          {btnTxt}
+        </Button>
+      </Link>
+    </div>
+  );
+};
+Home.showFooter = true;
 export default Home;

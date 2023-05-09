@@ -128,4 +128,5 @@ const LoginPage = () => {
     </>
   );
 };
+LoginPage.showFooter = true;
 export default LoginPage;

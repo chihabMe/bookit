@@ -14,7 +14,7 @@ const initialState = {
   password: "",
   rePassword: "",
 };
-const LoginPage = () => {
+const SignupPage = () => {
   const {
     data,
     isLoading,
@@ -136,4 +136,5 @@ const LoginPage = () => {
     </>
   );
 };
-export default LoginPage;
+SignupPage.showFooter = true;
+export default SignupPage;

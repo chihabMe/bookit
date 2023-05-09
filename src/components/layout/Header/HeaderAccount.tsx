@@ -64,7 +64,7 @@ const AuthenticatedUserView = () => {
         {({ open }) => (
           <div>
             <Menu.Button>
-              <Button className=" flex  cursor-pointer items-center gap-3 !bg-transparent px-2 py-2 !capitalize   !text-title dark:!text-title-dark  ">
+              <Button className=" flex  cursor-pointer items-center gap-3  !bg-transparent px-2 py-2 !capitalize   !text-title dark:!text-title-dark  ">
                 <UserIcon className=" h-6 w-6     md:h-7  md:w-7  " />
                 <div className="flex items-center gap-2 text-xs font-medium ">
                   <ChevronDownIcon
@@ -87,7 +87,7 @@ const AuthenticatedUserView = () => {
             >
               <Menu.Items
                 as="ul"
-                className="transparent  absolute right-0 mt-2 w-[220px] origin-top-right divide-y divide-gray-100 rounded-md bg-bg-light shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-dark"
+                className="transparent  absolute right-0 mt-2 w-[220px] origin-top-right divide-y divide-gray-100 rounded-lg bg-bg-light shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-dark"
               >
                 <div className="flex flex-col gap-1 px-1 py-2 pt-4">
                   <AuthMenuItem href="/profile">
@@ -136,7 +136,7 @@ const AuthMenuItem = ({
               active
                 ? "bg-primary  text-white"
                 : "text-text dark:text-text-dark"
-            } group flex flex w-full cursor-pointer items-center items-center gap-2 rounded-full  px-4  py-[13px] transition-all duration-200`}
+            } group flex flex w-full cursor-pointer items-center items-center gap-2 rounded-full  px-4  py-[11px] text-base transition-all duration-200`}
           >
             {children}
           </li>
