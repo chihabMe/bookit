@@ -58,7 +58,7 @@ const Home = () => {
             />
           </div>
         </section>
-        <section className="flex items-center justify-around  ">
+        <section className="flex flex-col items-center   justify-around md:flex-row  ">
           <InfoSectionItem
             alt="delevry man icon"
             href="/auth/login"
