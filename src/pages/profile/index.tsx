@@ -25,13 +25,13 @@ const ProfilePage = ({ user, f }: { user: User; f: number }) => {
           />
         </div>
         <div className="flex justify-end gap-2 py-4">
-          <Link href="/profile/resturant/add-menu-item">
+          <Link href="/profile/restaurant/add-to-menu">
             <Button className="capitalize">add item</Button>
           </Link>
-          <Link href="/profile/resturant/orders">
+          <Link href="/profile/restaurant/orders">
             <Button className="capitalize">see orders</Button>
           </Link>
-          <Link href="/profile/resturant/reservations">
+          <Link href="/profile/restaurant/reservations">
             <Button className="capitalize">reservations</Button>
           </Link>
         </div>

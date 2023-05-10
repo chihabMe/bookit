@@ -131,7 +131,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="w-full text-center">
-            <p>&copy 2023 Imaginary Food Ordering App. All rights reserved.</p>
+            <p>copy 2023 Imaginary Food Ordering App. All rights reserved.</p>
           </div>
         </div>
       </Container>
