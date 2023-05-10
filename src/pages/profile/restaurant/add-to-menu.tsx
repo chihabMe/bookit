@@ -2,10 +2,14 @@ import { Textarea } from "@material-tailwind/react";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import Button from "~/components/ui/Button";
 import { Select, Option } from "@material-tailwind/react";
-import { PlusIcon as AddIcon } from "@heroicons/react/24/solid";
+import {
+  PlusIcon as AddIcon,
+  PlusCircleIcon,
+  PhotoIcon,
+} from "@heroicons/react/24/solid";
 import Input from "~/components/ui/Input";
 import { MenuCategory } from "@prisma/client";
 import { prisma } from "~/server/db";
@@ -16,9 +20,11 @@ const initialState = {
 };
 const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
   const [form, setForm] = useState(initialState);
+  const [image, setImage] = useState<null | File>(null);
   const [category, setCategory] = useState<string>("");
+  const handleImageChange = (image: File) => setImage(image);
   const handleCategoryChange = (cat?: string) => {
-    if (category) setCategory(cat);
+    if (cat) setCategory(cat);
   };
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,7 +32,10 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
     console.log(form);
+    console.log(category);
+    console.log(image);
   };
   return (
     <>
@@ -59,7 +68,7 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
             </div>
             <Input
               placeholder="price"
-              type="number"
+              type="text"
               name="price"
               onChange={handleChange}
               className="!h-12 rounded-lg "
@@ -69,12 +78,12 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
               name="description"
               onChange={handleChange}
             />
+            <AddMenuItemImages handleFileChange={handleImageChange} />
             <Button
               className="flex items-center justify-center gap-2 py-4 capitalize  "
               type="submit"
             >
-              <span>add</span>
-              <AddIcon className="h-4 w-4" />
+              <span>save</span>
             </Button>
           </form>
         </section>
@@ -83,6 +92,45 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
   );
 };
 
+const AddMenuItemImages = ({
+  handleFileChange,
+}: {
+  handleFileChange: (file: File) => void;
+}) => {
+  const imageFileInput = useRef<null | HTMLInputElement>(null);
+  const uploadFile = (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log("uploading....");
+  };
+
+  const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target && e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (file) handleFileChange(file);
+    }
+  };
+  const openFileUpload = () => {
+    if (imageFileInput.current) imageFileInput.current?.click();
+  };
+
+  return (
+    <div className="cursor-pointer" onClick={openFileUpload}>
+      <input
+        className="hidden"
+        type="file"
+        accept="image/jpeg,image/png"
+        onChange={handleImageFileChange}
+        name="image"
+        ref={imageFileInput}
+      />
+      <Button className="flex items-center justify-center gap-2 px-2 py-1.5 capitalize  ">
+        <PlusCircleIcon className="h-6 w-6 text-white" />
+        <span>add image</span>
+      </Button>
+    </div>
+  );
+};
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     const session = await getSession(ctx);
