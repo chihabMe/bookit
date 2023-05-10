@@ -13,6 +13,7 @@ import {
 import Input from "~/components/ui/Input";
 import { MenuCategory } from "@prisma/client";
 import { prisma } from "~/server/db";
+import { api } from "~/utils/api";
 const initialState = {
   name: "",
   description: "",
@@ -31,11 +32,35 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const addMenuItem = api.menu.addItemToTheMenu.useMutation();
+  const uploadImage = async (url?: string) => {
+    const data = new FormData();
+    if (image && url) {
+      try {
+        data.append("file", image);
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: data,
+        });
+        console.log(res);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(form);
-    console.log(category);
-    console.log(image);
+    addMenuItem.mutate(
+      { ...form, categoryId: category },
+      {
+        onSuccess: (e) => {
+          uploadImage(addMenuItem.data);
+        },
+      }
+    );
   };
   return (
     <>

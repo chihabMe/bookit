@@ -4,6 +4,11 @@ import { UserRoles } from "@prisma/client";
 import { checkIsAdmin, findUserById } from "~/server/services/user.services";
 import { TRPC_ERROR_CODES_BY_KEY } from "@trpc/server/rpc";
 import { TRPCError } from "@trpc/server";
+import { generateUploadUrl, upload, upload_stream } from "~/helpers/cloudinary";
+import { Readable } from "stream";
+import streamifier from "streamifier";
+import * as tmp from "tmp";
+import fs from "node:fs";
 
 export const menuRouter = createTRPCRouter({
   getAllMenuItems: publicProcedure.query(({ ctx }) => {
@@ -30,17 +35,20 @@ export const menuRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string(),
-        price: z.number(),
+        price: z.string(),
         description: z.string(),
         categoryId: z.string(),
       })
     )
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
+      console.log(input);
+      const uploadURl = generateUploadUrl();
+      return uploadURl;
+      return "null";
       const id = ctx.session.user.id;
       const user = await findUserById(id, ctx.prisma);
       checkIsAdmin(user);
-      const restaurnats = await
-      ctx.prisma.restaurant.findMany({ take: 1 });
+      const restaurnats = await ctx.prisma.restaurant.findMany({ take: 1 });
       if (!restaurnats || restaurnats.length == 0 || !restaurnats[0])
         throw new TRPCError({
           code: "BAD_REQUEST",
