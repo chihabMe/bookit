@@ -16,6 +16,10 @@ const config = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "https",
+        hostname: "mg-bookit-bucket.s3.eu-north-1.amazonaws.com",
+      },
     ],
   },
   reactStrictMode: true,

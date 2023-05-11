@@ -19,7 +19,9 @@ const Button = ({
       size={size}
       variant={variant}
       disabled={disabled}
-      className={`  !bg-primary   !text-white !shadow-none  !shadow-primary ${className!} `}
+      className={` ${
+        disabled ? "!opacity-70" : ""
+      }  !bg-primary   !text-white !shadow-none  !shadow-primary ${className!} `}
       type={type}
       onClick={onClick}
     >

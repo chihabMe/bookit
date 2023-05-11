@@ -9,12 +9,14 @@ import {
   PlusIcon as AddIcon,
   PlusCircleIcon,
   PhotoIcon,
+  CheckIcon,
 } from "@heroicons/react/24/solid";
 import Input from "~/components/ui/Input";
 import { MenuCategory } from "@prisma/client";
 import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
 import { toastSuccess } from "~/helpers/toasters";
+import Spinner from "~/components/ui/Spinner";
 const initialState = {
   name: "",
   description: "",
@@ -47,29 +49,31 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
 
     try {
       const { singedURL: preSignedURLData } =
-        await getPreSignedURLMutation.mutateAsync();
+        await getPreSignedURLMutation.mutateAsync({
+          originalName: image.name,
+        });
 
       if (preSignedURLData) {
         const url = preSignedURLData;
 
-        const formData = new FormData();
-        formData.append("file", image);
-
         await fetch(url, {
           method: "PUT",
-          body: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: image,
         });
         const imageURL = url.split("?")[0];
         if (imageURL) {
-          await addMenuItem.mutate({
+          addMenuItem.mutateAsync({
             ...form,
             imageURL,
+            categoryId: category,
           });
         }
         toastSuccess({ message: "added" });
         setForm(initialState);
         setImage(null);
-
         // You can continue with the form submission or perform other operations here
         // For example, addMenuItem.mutate(formData);
       }
@@ -77,6 +81,7 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
       console.error("Error uploading image:", error);
     }
   };
+  const loading = addMenuItem.isLoading || getPreSignedURLMutation.isLoading;
   return (
     <>
       <Head>
@@ -91,6 +96,7 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
               name="name"
               onChange={handleChange}
               className="!h-12 rounded-lg "
+              value={form.name}
             />
             <div className="">
               <Select
@@ -112,18 +118,30 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
               name="price"
               onChange={handleChange}
               className="!h-12 rounded-lg "
+              value={form.price}
             />
             <Textarea
               placeholder="description"
               name="description"
               onChange={handleChange}
+              value={form.description}
             />
-            <AddMenuItemImages handleFileChange={handleImageChange} />
+            <AddMenuItemImages
+              file={image}
+              handleFileChange={handleImageChange}
+            />
             <Button
+              disabled={loading}
               className="flex items-center justify-center gap-2 py-4 capitalize  "
               type="submit"
             >
-              <span>save</span>
+              {loading && (
+                <>
+                  <span>saving</span>
+                  <Spinner className={` !h-4 !w-4 !text-white`} />
+                </>
+              )}
+              {!loading && <span>save</span>}
             </Button>
           </form>
         </section>
@@ -134,8 +152,10 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
 
 const AddMenuItemImages = ({
   handleFileChange,
+  file,
 }: {
   handleFileChange: (file: File) => void;
+  file: File | null;
 }) => {
   const imageFileInput = useRef<null | HTMLInputElement>(null);
   const uploadFile = (file: File) => {
@@ -165,8 +185,9 @@ const AddMenuItemImages = ({
         ref={imageFileInput}
       />
       <Button className="flex items-center justify-center gap-2 px-2 py-1.5 capitalize  ">
-        <PlusCircleIcon className="h-6 w-6 text-white" />
-        <span>add image</span>
+        {!file && <PlusCircleIcon className="h-6 w-6 text-white" />}
+        {file && <CheckIcon className="h-6 w-6 text-white" />}
+        <span>{file ? "added" : "add image"}</span>
       </Button>
     </div>
   );

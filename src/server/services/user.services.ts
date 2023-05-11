@@ -20,7 +20,7 @@ export const checkIsAdmin = (user: User) => {
     });
 };
 export const checkIsARestaurant = (user: User) => {
-  if (user.role != UserRoles.admin)
+  if (user.role != UserRoles.restaurant)
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message: "you don't have permissions to access this route",

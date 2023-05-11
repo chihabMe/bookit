@@ -10,8 +10,8 @@ const config = {
 };
 const s3 = new S3(config);
 
-export const generateUploadURL = async () => {
-  const fileName = crypto.randomUUID();
+export const generateUploadURL = async (originalName: string) => {
+  const fileName = crypto.randomUUID() + originalName;
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Key: fileName,

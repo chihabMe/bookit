@@ -106,7 +106,7 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
         </Button>
         <Image
           alt={`${item.name} image`}
-          src={"https://picsum.photos/150/150"}
+          src={item.image ?? ""}
           width={110}
           height={110}
           className="   rounded-full     "

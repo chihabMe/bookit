@@ -28,12 +28,6 @@ const HomeMenuItems = ({ category }: Props) => {
       {menuItems.items.map((item) => (
         <MenuItemCart key={item.id} item={item} />
       ))}
-      {menuItems.items.map((item) => (
-        <MenuItemCart key={item.id} item={item} />
-      ))}
-      {menuItems.items.map((item) => (
-        <MenuItemCart key={item.id} item={item} />
-      ))}
     </div>
   );
 };

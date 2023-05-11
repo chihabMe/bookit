@@ -45,8 +45,17 @@ export const menuRouter = createTRPCRouter({
       console.log(input);
       const id = ctx.session.user.id;
       const user = await findUserById(id, ctx.prisma);
-      checkIsAdmin(user);
       checkIsARestaurant(user);
+      const category = await ctx.prisma.menuCategory.findFirst({
+        where: {
+          id: input.categoryId,
+        },
+      });
+      if (!category)
+        return new TRPCError({
+          code: "BAD_REQUEST",
+          message: "invalid category id",
+        });
       const restuarant = await ctx.prisma.restaurant.findFirst({
         where: {
           userId: user.id,
@@ -63,7 +72,7 @@ export const menuRouter = createTRPCRouter({
           price: input.price,
           description: input.description,
           userId: user.id,
-          menuCategoryId: input.categoryId,
+          menuCategoryId: category.id,
           restaurantId: restuarant.id,
           image: input.imageURL,
         },
