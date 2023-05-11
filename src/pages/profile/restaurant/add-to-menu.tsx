@@ -14,6 +14,7 @@ import Input from "~/components/ui/Input";
 import { MenuCategory } from "@prisma/client";
 import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
+import { toastSuccess } from "~/helpers/toasters";
 const initialState = {
   name: "",
   description: "",
@@ -58,6 +59,16 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
           method: "PUT",
           body: formData,
         });
+        const imageURL = url.split("?")[0];
+        if (imageURL) {
+          await addMenuItem.mutate({
+            ...form,
+            imageURL,
+          });
+        }
+        toastSuccess({ message: "added" });
+        setForm(initialState);
+        setImage(null);
 
         // You can continue with the form submission or perform other operations here
         // For example, addMenuItem.mutate(formData);

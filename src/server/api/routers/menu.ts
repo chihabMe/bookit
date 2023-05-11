@@ -1,14 +1,13 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { UserRoles } from "@prisma/client";
-import { checkIsAdmin, findUserById } from "~/server/services/user.services";
+import {
+  checkIsARestaurant,
+  checkIsAdmin,
+  findUserById,
+} from "~/server/services/user.services";
 import { TRPC_ERROR_CODES_BY_KEY } from "@trpc/server/rpc";
 import { TRPCError } from "@trpc/server";
-import { generateUploadUrl, upload, upload_stream } from "~/helpers/cloudinary";
-import { Readable } from "stream";
-import streamifier from "streamifier";
-import * as tmp from "tmp";
-import fs from "node:fs";
 import { generateUploadURL } from "~/helpers/s3";
 
 export const menuRouter = createTRPCRouter({
@@ -39,18 +38,21 @@ export const menuRouter = createTRPCRouter({
         price: z.string(),
         description: z.string(),
         categoryId: z.string(),
+        imageURL: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       console.log(input);
-      const url = generateUploadURL("file.phg");
-      return url;
-      return "null";
       const id = ctx.session.user.id;
       const user = await findUserById(id, ctx.prisma);
       checkIsAdmin(user);
-      const restaurnats = await ctx.prisma.restaurant.findMany({ take: 1 });
-      if (!restaurnats || restaurnats.length == 0 || !restaurnats[0])
+      checkIsARestaurant(user);
+      const restuarant = await ctx.prisma.restaurant.findFirst({
+        where: {
+          userId: user.id,
+        },
+      });
+      if (!restuarant)
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "invalid restaurant",
@@ -62,7 +64,8 @@ export const menuRouter = createTRPCRouter({
           description: input.description,
           userId: user.id,
           menuCategoryId: input.categoryId,
-          restaurantId: restaurnats[0].id,
+          restaurantId: restuarant.id,
+          image: input.imageURL,
         },
       });
     }),

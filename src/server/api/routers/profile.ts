@@ -35,6 +35,14 @@ export const profileRouter = createTRPCRouter({
           role: input.type,
         },
       });
+      if (input.type == "restaurant") {
+        await ctx.prisma.restaurant.create({
+          data: {
+            userId: user.id,
+            name: user.name ?? "",
+          },
+        });
+      }
       const { password: _, ...userWithoutPassword } = { ...user };
       return userWithoutPassword;
     }),
