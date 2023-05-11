@@ -56,17 +56,12 @@ export const authOptions: NextAuthOptions = {
     jwt: ({ account, token, user, profile, session, trigger }) => {
       // //@ts-ignore
       // token.user = user;
-      console.log("-----------f it jwt-------------");
-      console.log("user>", user);
-      console.log("account>", account);
-      console.log("profile", profile);
       if (user) {
         token.user = { role: user.role, id: user.id };
       }
       return token;
     },
     session: ({ session, user, token }) => {
-      console.log("---sessxion--");
       const returnedSession = {
         ...session,
         user: {
@@ -74,7 +69,6 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
         },
       };
-      console.log(returnedSession);
 
       // //@ts-ignore
       // if (!returnedSession.user.id) returnedSession.user.id = token.user.id;
@@ -118,15 +112,9 @@ export const authOptions: NextAuthOptions = {
             credentials.password,
             user.password
           );
-          console.log(user.password);
-          console.log("password", credentials.password);
-          console.log(comparePassword);
           if (!comparePassword) throw new Error("invalid credentials");
-          console.log(user);
-          console.log("i will return the user");
           return user;
         } catch (err) {
-          console.error(err);
           return null;
         }
       },

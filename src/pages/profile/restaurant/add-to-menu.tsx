@@ -19,48 +19,52 @@ const initialState = {
   description: "",
   price: "",
 };
+
 const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
-  const [form, setForm] = useState(initialState);
-  const [image, setImage] = useState<null | File>(null);
+  const [form, setForm] = useState<typeof initialState>(initialState);
+  const [image, setImage] = useState<File | null>(null);
   const [category, setCategory] = useState<string>("");
+
   const handleImageChange = (image: File) => setImage(image);
   const handleCategoryChange = (cat?: string) => {
     if (cat) setCategory(cat);
   };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const addMenuItem = api.menu.addItemToTheMenu.useMutation();
-  const uploadImage = async (url?: string) => {
-    const data = new FormData();
-    if (image && url) {
-      try {
-        data.append("file", image);
-        const res = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: data,
-        });
-        console.log(res);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-  const handleFormSubmit = (e: FormEvent) => {
+  const getPreSignedURLMutation =
+    api.upload.getPreSignedUploadURL.useMutation();
+
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    addMenuItem.mutate(
-      { ...form, categoryId: category },
-      {
-        onSuccess: (e) => {
-          uploadImage(addMenuItem.data);
-        },
+    if (!image) return;
+
+    try {
+      const { singedURL: preSignedURLData } =
+        await getPreSignedURLMutation.mutateAsync();
+
+      if (preSignedURLData) {
+        const url = preSignedURLData;
+
+        const formData = new FormData();
+        formData.append("file", image);
+
+        await fetch(url, {
+          method: "PUT",
+          body: formData,
+        });
+
+        // You can continue with the form submission or perform other operations here
+        // For example, addMenuItem.mutate(formData);
       }
-    );
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
   return (
     <>

@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.331.0",
+    "@aws-sdk/s3-request-presigner": "^3.331.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "@material-tailwind/react": "^1.4.2",

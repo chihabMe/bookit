@@ -9,6 +9,7 @@ import { Readable } from "stream";
 import streamifier from "streamifier";
 import * as tmp from "tmp";
 import fs from "node:fs";
+import { generateUploadURL } from "~/helpers/s3";
 
 export const menuRouter = createTRPCRouter({
   getAllMenuItems: publicProcedure.query(({ ctx }) => {
@@ -42,8 +43,8 @@ export const menuRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       console.log(input);
-      const uploadURl = generateUploadUrl();
-      return uploadURl;
+      const url = generateUploadURL("file.phg");
+      return url;
       return "null";
       const id = ctx.session.user.id;
       const user = await findUserById(id, ctx.prisma);
