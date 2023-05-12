@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { generateUploadURL } from "~/helpers/s3";
+import { TRPCError } from "@trpc/server";
 
 export const uploadRouter = createTRPCRouter({
   getPreSignedUploadURL: protectedProcedure
@@ -10,7 +11,15 @@ export const uploadRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const singedURL = await generateUploadURL(input.originalName);
-      return { singedURL };
+      try {
+        const singedURL = await generateUploadURL(input.originalName);
+        return { singedURL };
+      } catch (err) {
+        console.error(err);
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "something went wrong",
+        });
+      }
     }),
 });

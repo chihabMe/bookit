@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const reservationRouter = createTRPCRouter({
@@ -19,7 +20,10 @@ export const reservationRouter = createTRPCRouter({
       return reservations;
     } catch (err) {
       console.log(err);
-      throw err;
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message: "something went wrong ",
+      });
     }
   }),
 });

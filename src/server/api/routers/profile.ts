@@ -18,7 +18,11 @@ export const profileRouter = createTRPCRouter({
       }
       return getUserWihtoutPassword(user);
     } catch (err) {
-      throw err;
+      console.error(err);
+      throw new TRPCError({
+        message: "try to login again",
+        code: "UNAUTHORIZED",
+      });
     }
   }),
   changeProfileType: protectedProcedure
@@ -28,23 +32,30 @@ export const profileRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      console.log("id=>", ctx.session.user);
-      const user = await ctx.prisma.user.update({
-        where: { id: ctx.session.user.id },
-        data: {
-          role: input.type,
-        },
-      });
-      if (input.type == "restaurant") {
-        await ctx.prisma.restaurant.create({
+      try {
+        const user = await ctx.prisma.user.update({
+          where: { id: ctx.session.user.id },
           data: {
-            userId: user.id,
-            name: user.name ?? "",
+            role: input.type,
           },
         });
+        if (input.type == "restaurant") {
+          await ctx.prisma.restaurant.create({
+            data: {
+              userId: user.id,
+              name: user.name ?? "",
+            },
+          });
+        }
+        const { password: _, ...userWithoutPassword } = { ...user };
+        return userWithoutPassword;
+      } catch (err) {
+        console.error(err);
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "something went wrong ",
+        });
       }
-      const { password: _, ...userWithoutPassword } = { ...user };
-      return userWithoutPassword;
     }),
   updateProfile: protectedProcedure
     .input(
@@ -69,7 +80,10 @@ export const profileRouter = createTRPCRouter({
         return getUserWihtoutPassword(user);
       } catch (err) {
         console.error(err);
-        throw err;
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "something went wrong ",
+        });
       }
     }),
 });
