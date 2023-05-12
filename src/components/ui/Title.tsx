@@ -1,6 +1,6 @@
 const Title = ({ text }: { text: string }) => {
   return (
-    <h2 className="py-2 text-2xl font-bold capitalize text-title dark:text-title-dark">
+    <h2 className="py-4 font-libre text-xl font-bold capitalize text-primary  ">
       {text}
     </h2>
   );

@@ -23,7 +23,7 @@ const MenuPage = () => {
   return (
     <section className="w-full">
       <MenuSearchBar />
-      <Title text="menu categories" />
+      <Title text="categories" />
       <HomePageMenuCategories
         currentCategory={currentCategory}
         setCategoryIfNull={setCategoryIfNull}

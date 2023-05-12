@@ -35,42 +35,6 @@ const HomePageMenuCategories = ({
     <ul className=" scrollbar-hide flex w-full  flex-nowrap gap-2 overflow-x-scroll py-4">
       {categories.map((category) => (
         <HomePageMenuCategoryItem
-          changeCategory={handleChangeCategory}
-          active={category.id == currentCategory?.id}
-          key={category.id}
-          item={category}
-        />
-      ))}
-
-      {categories.map((category) => (
-        <HomePageMenuCategoryItem
-          active={category.id == currentCategory?.id}
-          changeCategory={handleChangeCategory}
-          key={category.id}
-          item={category}
-        />
-      ))}
-
-      {categories.map((category) => (
-        <HomePageMenuCategoryItem
-          active={category.id == currentCategory?.id}
-          changeCategory={handleChangeCategory}
-          key={category.id}
-          item={category}
-        />
-      ))}
-
-      {categories.map((category) => (
-        <HomePageMenuCategoryItem
-          changeCategory={handleChangeCategory}
-          active={category.id == currentCategory?.id}
-          key={category.id}
-          item={category}
-        />
-      ))}
-
-      {categories.map((category) => (
-        <HomePageMenuCategoryItem
           active={category.id == currentCategory?.id}
           changeCategory={handleChangeCategory}
           key={category.id}
@@ -139,9 +103,6 @@ const MenuCategoryItemSkelton = () => {
 const MenuCategoriesSkelton = () => {
   return (
     <ul className=" scrollbar-hide flex w-full  flex-nowrap gap-2 overflow-x-scroll py-4">
-      <MenuCategoryItemSkelton />
-      <MenuCategoryItemSkelton />
-      <MenuCategoryItemSkelton />
       <MenuCategoryItemSkelton />
       <MenuCategoryItemSkelton />
       <MenuCategoryItemSkelton />

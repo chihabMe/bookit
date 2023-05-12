@@ -17,6 +17,26 @@ export const menuRouter = createTRPCRouter({
   getAllCategories: publicProcedure.query(async ({ ctx }) => {
     return ctx.prisma.menuCategory.findMany();
   }),
+  addCategory: protectedProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        imageURL: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.session.user.role != "admin")
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "you dont have the permessions to access this route",
+        });
+      return ctx.prisma.menuCategory.create({
+        data: {
+          name: input.name,
+          image: input.imageURL,
+        },
+      });
+    }),
   getMenuItemsByCategory: publicProcedure
     .input(
       z.object({
