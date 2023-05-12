@@ -107,9 +107,9 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
         <Image
           alt={`${item.name} image`}
           src={item.image ?? ""}
-          width={110}
-          height={110}
-          className="   rounded-full     "
+          width={130}
+          height={130}
+          className="   h-[130px]   w-[130px] rounded-full  "
         />
       </div>
       <div className="flex flex flex-col items-center     !pt-4">
