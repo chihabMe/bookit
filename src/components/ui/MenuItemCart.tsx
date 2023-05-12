@@ -25,6 +25,7 @@ import useCart from "~/hooks/useCart";
 import { useState } from "react";
 import { toastSuccess } from "~/helpers/toasters";
 import Skeleton from "react-loading-skeleton";
+import Link from "next/link";
 
 const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
   const { addItem } = useCart();
@@ -95,52 +96,54 @@ const MenuItemCart = ({ item }: { item: MenuItem }) => {
   const [liked, setLiked] = useState(false);
   const handleLikeClick = () => setLiked((prev) => !prev);
   return (
-    <div className="!shadow-xs group relative m-1  mx-auto w-full  max-w-[250px] cursor-pointer rounded-[20px]        p-2    shadow-lg     ">
-      <div className="   flex  min-h-[120px] w-full flex-col items-center  !py-1  !shadow-none ">
-        <Button
-          onClick={handleLikeClick}
-          className="!absolute !right-[0px]  !top-[5px] rounded-full !bg-transparent p-2 hover:ring-2 hover:ring-red-300 active:ring-1 "
-        >
-          {!liked && <OutlinedHeart className="h-6 w-6 text-red-400" />}
-          {liked && <SolidHeart className="h-6 w-6 text-red-400" />}
-        </Button>
-        <Image
-          alt={`${item.name} image`}
-          src={item.image ?? ""}
-          width={130}
-          height={130}
-          className="   h-[130px]   w-[130px] rounded-full  "
-        />
-      </div>
-      <div className="flex flex flex-col items-center     !pt-4">
-        <span className="font-bold capitalize text-title dark:text-title-dark">
-          {item.name}
-        </span>
-      </div>
-      <div className="flex flex flex-col items-center     !py-2">
-        <span className="font-bold capitalize text-primary ">
-          $ {item.price.toString()}
-        </span>
-      </div>
-      <div className="   flex justify-between ">
-        <div className="flex items-center gap-2">
-          <StarIcon className="h-4 w-4 text-primary" />
-          <span className=" text-sm font-bold text-title dark:text-title-dark">
-            {4.5}
+    <Link href={`/menu/${item.slug}`}>
+      <div className="!shadow-xs group relative m-1  mx-auto w-full  max-w-[250px] cursor-pointer rounded-[20px]        p-2    shadow-lg     ">
+        <div className="   flex  min-h-[120px] w-full flex-col items-center  !py-1  !shadow-none ">
+          <Button
+            onClick={handleLikeClick}
+            className="!absolute !right-[0px]  !top-[5px] rounded-full !bg-transparent p-2 hover:ring-2 hover:ring-red-300 active:ring-1 "
+          >
+            {!liked && <OutlinedHeart className="h-6 w-6 text-red-400" />}
+            {liked && <SolidHeart className="h-6 w-6 text-red-400" />}
+          </Button>
+          <Image
+            alt={`${item.name} image`}
+            src={item.image ?? ""}
+            width={130}
+            height={130}
+            className="   h-[130px]   w-[130px] rounded-full  "
+          />
+        </div>
+        <div className="flex flex flex-col items-center     !pt-4">
+          <span className="font-bold capitalize text-title dark:text-title-dark">
+            {item.name}
           </span>
         </div>
+        <div className="flex flex flex-col items-center     !py-2">
+          <span className="font-bold capitalize text-primary ">
+            $ {item.price.toString()}
+          </span>
+        </div>
+        <div className="   flex justify-between ">
+          <div className="flex items-center gap-2">
+            <StarIcon className="h-4 w-4 text-primary" />
+            <span className=" text-sm font-bold text-title dark:text-title-dark">
+              {4.5}
+            </span>
+          </div>
 
-        <div className="flex justify-center">
-          <Button
-            onClick={addToCartHandler}
-            size="sm"
-            className="  flex  h-[34px] w-[34px] items-center  justify-center !rounded-full !p-0 hover:ring-1 hover:ring-primary active:ring-0  "
-          >
-            <PlusIcon className="h-3 w-3 text-white" />
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              onClick={addToCartHandler}
+              size="sm"
+              className="  flex  h-[34px] w-[34px] items-center  justify-center !rounded-full !p-0 hover:ring-1 hover:ring-primary active:ring-0  "
+            >
+              <PlusIcon className="h-3 w-3 text-white" />
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
