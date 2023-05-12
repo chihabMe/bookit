@@ -65,7 +65,7 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
         });
         const imageURL = url.split("?")[0];
         if (imageURL) {
-          addMenuItem.mutateAsync({
+          await addMenuItem.mutateAsync({
             ...form,
             imageURL,
             categoryId: category,

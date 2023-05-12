@@ -9,6 +9,7 @@ import {
 import { TRPC_ERROR_CODES_BY_KEY } from "@trpc/server/rpc";
 import { TRPCError } from "@trpc/server";
 import { generateUploadURL } from "~/helpers/s3";
+import { generateUniqueSlug } from "~/helpers/slug";
 
 export const menuRouter = createTRPCRouter({
   getAllMenuItems: publicProcedure.query(({ ctx }) => {
@@ -117,6 +118,14 @@ export const menuRouter = createTRPCRouter({
             code: "BAD_REQUEST",
             message: "invalid restaurant",
           });
+        const slug = generateUniqueSlug(input.name, (slug: string) =>
+          ctx.prisma.menuItem.findFirst({
+            where: {
+              slug,
+            },
+          })
+        );
+        console.log("generated slug=", slug);
         return ctx.prisma.menuItem.create({
           data: {
             name: input.name,
@@ -126,6 +135,7 @@ export const menuRouter = createTRPCRouter({
             menuCategoryId: category.id,
             restaurantId: restuarant.id,
             image: input.imageURL,
+            slug,
           },
         });
       } catch (err) {
