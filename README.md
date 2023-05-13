@@ -1,4 +1,4 @@
-#Technologies Used in this Project
+# Technologies Used in this Project
 
     TypeScript (Backend/Frontend)
     React.js (Frontend)
@@ -12,11 +12,12 @@
     tRPC (Backend)
     Node.js (Backend)
 
-#How to Run the Project
+# How to Run the Project
 
-##Prerequisites
+## Prerequisites
 
-####Make sure you have the following environment variables set:
+#### Make sure you have the following environment variables set:
+
 -DATABASE_URL=""
 -NEXTAUTH_URL=""
 -NEXTAUTH_SECRET=""
@@ -27,7 +28,7 @@
 -AWS_SECRET=""
 -AWS_KEY=""
 
-##Installation
+## Installation
 
 ### Install the required packages by running the following command:
 
@@ -43,16 +44,16 @@ pnpm install
 pnpm build
 ```
 
-##Run the Server
+## Run the Server
 
-###Start the server with the following command:
+### Start the server with the following command:
 
 ```
 pnpm start
 
 ```
 
-#Enjoy using the Book Ordering Web App!
+# Enjoy using the Book Ordering Web App!
 
 
 
