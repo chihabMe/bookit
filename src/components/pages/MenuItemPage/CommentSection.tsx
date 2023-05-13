@@ -19,7 +19,7 @@ const CommentsSection = ({ menuItemId }: { menuItemId: string }) => {
       <AddComment />
       <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2  ">
         {commentsQuery.data.map((comment) => (
-          <CommentItem comment={comment} />
+          <CommentItem key={comment.id} comment={comment} />
         ))}
       </div>
     </section>

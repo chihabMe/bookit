@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 const AddComment = () => {
   const addCommentMutation = api.comments.addComment.useMutation();
   const [body, setBody] = useState("");
+  const invalidate = () => api.useContext().comments.invalidate;
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     addCommentMutation.mutate(
@@ -16,6 +17,7 @@ const AddComment = () => {
         onSuccess: () => {
           toastSuccess({ message: "commented" });
           setBody("");
+          invalidate();
         },
         onError: (err) => {
           toastError({ message: err.message });

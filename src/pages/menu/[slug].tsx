@@ -124,7 +124,7 @@ const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
             </div>
           </div>
         </section>
-        <CommentsSection />
+        <CommentsSection menuItemId={menuItem.id} />
       </main>
     </>
   );
