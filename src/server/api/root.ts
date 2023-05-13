@@ -7,6 +7,7 @@ import { profileRouter } from "./routers/profile";
 import { reservationRouter } from "./routers/resevation";
 import { restaurantsRouter } from "./routers/restuarants";
 import { commentRouter } from "./routers/comments";
+import { uploadRouter } from "./routers/upload";
 
 /**
  * This is the primary router for your server.
