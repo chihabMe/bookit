@@ -5,7 +5,7 @@ specifiers:
   '@aws-sdk/s3-request-presigner': ^3.331.0
   '@headlessui/react': ^1.7.14
   '@heroicons/react': ^2.0.17
-  '@material-tailwind/react': ^1.4.2
+  '@material-tailwind/react': ^2.0.0
   '@next-auth/prisma-adapter': ^1.0.5
   '@prisma/client': ^4.11.0
   '@reduxjs/toolkit': ^1.9.5
@@ -54,7 +54,7 @@ dependencies:
   '@aws-sdk/s3-request-presigner': 3.331.0
   '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.17_react@18.2.0
-  '@material-tailwind/react': 1.4.2_biqbaboplfbrettd7655fr4n2y
+  '@material-tailwind/react': 2.0.0_biqbaboplfbrettd7655fr4n2y
   '@next-auth/prisma-adapter': 1.0.5_a6smvnkimirbai6k64h2bmekwe
   '@prisma/client': 4.13.0_prisma@4.13.0
   '@reduxjs/toolkit': 1.9.5_k4ae6lp43ej6mezo3ztvx6pykq
@@ -1262,8 +1262,8 @@ packages:
       - supports-color
     dev: false
 
-  /@material-tailwind/react/1.4.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-XJ1Ie8xXMV2qZEtm0LgnJNK+8Lh1Si8TvOf0jKWGI2rHleD8U/Zype6k1AyRhBHHUwc6B19w8uR1fCIFvumURQ==}
+  /@material-tailwind/react/2.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-YwzSQ8rJ7nzhFQYxyv9+yjAsq7E5zNJrch9KxQqs7j6xNN/eD9y44WolnomTm6EADQMOGvQao8qX6RhQ1rHz6w==}
     peerDependencies:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
