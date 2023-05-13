@@ -29,6 +29,15 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model Comment {
+  id        String   @id @default(uuid())
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+}
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -65,6 +74,7 @@ model User {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @default(now()) @updatedAt
   restaurant Restaurant?
+  Comment    Comment[]
 }
 
 model RestaurantImage {
@@ -119,7 +129,7 @@ model MenuCategory {
 model MenuItem {
   id             String          @id @default(uuid())
   name           String
-  slug           String @default("")
+  slug           String          @default("")
   price          Decimal
   description    String          @db.Text
   createdAt      DateTime        @default(now())
@@ -212,22 +222,24 @@ model Table {
   restaurant   Restaurant    @relation(fields: [restaurantId], references: [id])
   restaurantId String
 }
+
 enum ReservationStatus {
   proccesing
   canceled
   completed
 }
+
 model Reservation {
-  id            String           @id @default(uuid())
-  checkIn          DateTime         @default(now())
-  numberOfHours ReservationHours @default(TWO_POINT_FIVE)
-  user          User             @relation(fields: [userId], references: [id])
+  id            String            @id @default(uuid())
+  checkIn       DateTime          @default(now())
+  numberOfHours ReservationHours  @default(TWO_POINT_FIVE)
+  user          User              @relation(fields: [userId], references: [id])
   userId        String
-  table         Table            @relation(fields: [tableId], references: [id])
+  table         Table             @relation(fields: [tableId], references: [id])
   tableId       String
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @default(now()) @updatedAt
-  restaurant    Restaurant       @relation(fields: [restaurantId], references: [id])
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @default(now()) @updatedAt
+  restaurant    Restaurant        @relation(fields: [restaurantId], references: [id])
   restaurantId  String
-  status ReservationStatus @default(proccesing)
+  status        ReservationStatus @default(proccesing)
 }
