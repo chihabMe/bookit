@@ -1,16 +1,62 @@
-# book ordering web app 
+#Technologies Used in this Project
+
+    TypeScript (Backend/Frontend)
+    React.js (Frontend)
+    Next.js (Frontend)
+    Vercel (Deployment)
+    AWS S3 (Storing images in S3 bucket)
+    AWS EC2 (Linux server with MySQL database)
+    NextAuth.js (Authentication)
+    Prisma (ORM)
+    Tailwind CSS (Design)
+    tRPC (Backend)
+    Node.js (Backend)
+
+#How to Run the Project
+
+##Prerequisites
+
+####Make sure you have the following environment variables set:
+-DATABASE_URL=""
+-NEXTAUTH_URL=""
+-NEXTAUTH_SECRET=""
+-DISCORD_CLIENT_ID=""
+-DISCORD_CLIENT_SECRET=""
+-S3_BUCKET_NAME=""
+-S3_REGION=""
+-AWS_SECRET=""
+-AWS_KEY=""
+
+##Installation
+
+### Install the required packages by running the following command:
+
+```bash
+pnpm install
+```
+
+##Build
+
+### Build the project using the following command:
+
+```bash
+pnpm build
+```
+
+##Run the Server
+
+###Start the server with the following command:
+
+```
+pnpm start
+
+```
+
+#Enjoy using the Book Ordering Web App!
 
 
-## techs used to build with project 
-- [typescipt](https://www.typescriptlang.org/) (backend/frontend)
-- [React.js](https://react.dev/)(frontend)
-- [Next.js](https://nextjs.org)(frontend)
-- [vercel](https://nextjs.org)(deployment)
-- [AWS(s3)](https://nextjs.org)(sotring images in s3 bucket)
-- [AWS(EC2)](https://nextjs.org)(linux server with mysql database)
-- [NextAuth.js](https://next-auth.js.org)(authentication )
-- [Prisma](https://prisma.io)(orm)
-- [Tailwind CSS](https://tailwindcss.com)(design)
-- [tRPC](https://trpc.io) (backend)
-- [node](https://trpc.io) (backend)
+
+
+
+
 
