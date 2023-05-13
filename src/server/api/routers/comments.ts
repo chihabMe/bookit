@@ -7,7 +7,7 @@ export const commentRouter = createTRPCRouter({
     .input(z.object({ menuItemId: z.string() }))
     .query(async ({ ctx, input }) => {
       try {
-        return ctx.prisma.comment.findFirst({
+        const comments = await ctx.prisma.comment.findMany({
           where: {
             id: input.menuItemId,
           },
@@ -19,6 +19,7 @@ export const commentRouter = createTRPCRouter({
             },
           },
         });
+        return comments;
       } catch (err) {
         console.error(err);
         throw new TRPCError({
