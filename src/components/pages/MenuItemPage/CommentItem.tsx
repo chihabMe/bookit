@@ -8,6 +8,7 @@ import {
 import { StarIcon } from "@heroicons/react/24/solid";
 import { ICommentItemWithUser } from "./CommentSection";
 import Skeleton from "react-loading-skeleton";
+import { getValueFromEnum } from "~/helpers/prismaEnumsConverters";
 
 const CommentItem = ({ comment }: { comment: ICommentItemWithUser }) => {
   return (
@@ -27,14 +28,11 @@ const CommentItem = ({ comment }: { comment: ICommentItemWithUser }) => {
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
             <Typography variant="h5" color="blue-gray">
-              {comment.user.name}
+              {comment.user.name??"none"}
             </Typography>
             <div className="5 flex items-center gap-0">
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
-              <StarIcon className="h-5 w-5 text-yellow-700" />
+              <RatingStars value={getValueFromEnum(comment.rate)??0} />
+                
             </div>
           </div>
           <Typography color="blue-gray"></Typography>
@@ -45,6 +43,15 @@ const CommentItem = ({ comment }: { comment: ICommentItemWithUser }) => {
       </CardBody>
     </Card>
   );
+};
+
+const RatingStars = ({ value }:{value:number}) => {
+  const stars = [];
+  for (let i = 0; i < value; i++) {
+    stars.push(<StarIcon className="h-5 w-5 text-yellow-700" key={i} />);
+  }
+
+  return <>{stars}</>;
 };
 export const CommentItemSkelaton = () => {
   return (

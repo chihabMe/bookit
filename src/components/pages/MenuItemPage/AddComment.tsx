@@ -2,6 +2,7 @@ import { Rating, Spinner, Textarea } from "@material-tailwind/react";
 import { type ChangeEvent, type FormEvent, useState } from "react";
 
 import Button from "~/components/ui/Button";
+import { getEnumFromValue } from "~/helpers/prismaEnumsConverters";
 import { toastError, toastSuccess } from "~/helpers/toasters";
 import { api } from "~/utils/api";
 const AddComment = ({menuItemId}:{menuItemId:string}) => {
@@ -16,6 +17,7 @@ const AddComment = ({menuItemId}:{menuItemId:string}) => {
       {
         body,
         menuItemId
+        rate:getEnumFromValue(rated)
       },
       {
         onSuccess: () => {
