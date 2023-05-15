@@ -27,7 +27,7 @@ const CommentItem = ({ comment }: { comment: ICommentItemWithUser }) => {
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
             <Typography variant="h5" color="blue-gray">
-              {comment.user}
+              {comment.user.name}
             </Typography>
             <div className="5 flex items-center gap-0">
               <StarIcon className="h-5 w-5 text-yellow-700" />
