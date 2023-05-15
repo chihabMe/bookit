@@ -33,7 +33,6 @@ interface MenuItemPageProps {
 
 const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
   const [qt, setQt] = useState(1);
-  const [rated, setRated] = useState(0);
   const { addItem } = useCart();
   const handleQtChange = (e: ChangeEvent<HTMLInputElement>) => {
     const quantity = parseInt(e.target.value);
@@ -81,22 +80,6 @@ const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
                   <p className="px-2  text-lg text-sm text-text dark:text-text-dark">
                     {menuItem.description}
                   </p>
-                </div>
-                <div className="mb-6 flex items-center">
-                  <div className="mr-4 inline-flex">
-                    <button className="mr-1"></button>
-                    <button>
-                      <div className="flex items-center gap-2">
-                        <Rating
-                          value={rated}
-                          onChange={(value) => setRated(value)}
-                        />
-                      </div>
-                    </button>
-                  </div>
-                  <span className="text-md font-bold text-text dark:text-text-dark ">
-                    4.59
-                  </span>
                 </div>
                 <div className="mb-10">
                   <h4 className="font-heading mb-3 font-medium text-text dark:text-text-dark">

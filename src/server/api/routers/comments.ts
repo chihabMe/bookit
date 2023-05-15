@@ -19,7 +19,6 @@ export const commentRouter = createTRPCRouter({
             },
           },
         });
-        console.log("comments=>", comments);
         return comments;
       } catch (err) {
         console.error(err);
