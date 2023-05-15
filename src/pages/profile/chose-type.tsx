@@ -35,20 +35,16 @@ const ProfileChoseType = () => {
         },
       });
       toastSuccess({
-        message: `you need to login again`,
-        rest: {
-          duration: 4000,
-        },
-      });
-      toastSuccess({
-        message: `you will be redirected after 3s`,
+        message: `you will be redirected `,
         rest: {
           duration: 4000,
         },
       });
       setTimeout(() => {
-        router.push("/auth/logout").catch((err) => console.error(err));
-      }, 3000);
+        router
+          .push("/auth/logout?next=/auth/login")
+          .catch((err) => console.error(err));
+      }, 2000);
     }
     if (!isLoading && isError) {
       toastError({

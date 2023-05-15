@@ -17,6 +17,7 @@ import useAppDispatch from "~/hooks/useAppDispatch";
 import useWindowSize from "~/hooks/useWindowSize";
 import { uiActions } from "~/store/slices/ui.slice";
 import ThemeToggler from "../ui/ThemeToggler";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 const LeftAside = () => {
   const { data: user, status } = useSession();
@@ -78,10 +79,20 @@ relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
           <ThemeToggler />
         </li>
 
-        <LeftAsideItem
-          href="/profile/favorite"
-          Icon={<HeartIcon className="h-6 w-6 md:h-8 md:w-8 " />}
-        />
+        {user && user.user.role == "customer" && (
+          <LeftAsideItem
+            href="/profile/favorite"
+            Icon={<HeartIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+          />
+        )}
+
+        {user && user.user.role == "restaurant" && (
+          <LeftAsideItem
+            href="/profile/restuarant/add-to-menu"
+            Icon={<PlusIcon className="h-6 w-6 md:h-8 md:w-8 " />}
+          />
+        )}
+
         {!isLoading && !isAuth && <UnAuthenticatedView />}
         {!isLoading && isAuth && <AuthenticatedView />}
       </ul>

@@ -9,6 +9,7 @@ import Input from "~/components/ui/Input";
 import { toastSuccess } from "~/helpers/toasters";
 import { useRouter } from "next/router";
 import Header from "~/components/layout/Header";
+import { LoaderIcon } from "react-hot-toast";
 const initialState = {
   email: "",
   password: "",
@@ -94,8 +95,10 @@ const SignupPage = () => {
             />
             <Button
               type="submit"
-              className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary"
+              disabled={isLoading}
+              className="relative mt-2 flex flex h-12 items-center items-center  justify-center justify-center justify-center gap-2 rounded-lg capitalize hover:ring-2 hover:ring-primary"
             >
+              {isLoading && <LoaderIcon className="!h-4 !w-4" />}
               <span>sign up</span>
             </Button>
 

@@ -17,6 +17,7 @@ import Input from "~/components/ui/Input";
 import { toastSuccess } from "~/helpers/toasters";
 import { HandleThunkActionCreator } from "react-redux";
 import Header from "~/components/layout/Header";
+import { Spinner } from "@material-tailwind/react";
 const initialState = {
   email: "",
   password: "",
@@ -26,26 +27,34 @@ const LoginPage = () => {
   const [form, setForm] = useState(initialState);
   const [isAuth, setIsAuth] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const router = useRouter();
   const handleSubmit = async (e: FormEvent): Promise<void> => {
-    e.preventDefault();
-    console.log(form);
-    const resposne = await signIn("credentials", {
-      redirect: false,
+    try {
+      e.preventDefault();
+      console.log(form);
+      setIsLoading(true);
+      const resposne = await signIn("credentials", {
+        redirect: false,
 
-      email: form.email,
-      password: form.password,
-    });
-    if (resposne?.ok) {
-      toastSuccess({
-        message: "logged in successfully",
+        email: form.email,
+        password: form.password,
       });
-      router.push("/").catch((err) => console.log(err));
+      if (resposne?.ok) {
+        toastSuccess({
+          message: "logged in successfully",
+        });
+        router.push("/").catch((err) => console.log(err));
+      }
+      if (resposne?.error) setIsError(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
     }
-    if (resposne?.error) setIsError(true);
   };
   // useEffect(() => {
   //   // if (isAuth) router.push("/").catch((err) => console.log(err));
@@ -86,8 +95,9 @@ const LoginPage = () => {
 
             <Button
               type="submit"
-              className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary"
+              className="relative mt-2 flex h-12 items-center justify-center gap-2  rounded-lg capitalize hover:ring-2 hover:ring-primary "
             >
+              {isLoading && <Spinner className="!h-4 !w-4" />}
               <span>sign in</span>
             </Button>
 
