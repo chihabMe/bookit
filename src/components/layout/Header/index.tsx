@@ -20,7 +20,7 @@ const Header = () => {
       <nav className="hidden md:flex ">
         <ul className="font-mono flex  items-center gap-[10px]  font-medium  capitalize  text-text  dark:text-title-dark">
           <li className="cursor-pointer px-2 text-sm transition-all duration-300 hover:text-primary">
-            register
+            <Link href="/auth/register">register</Link>
           </li>
           <li className="cursor-pointer px-2 text-sm transition-all duration-300 hover:text-primary">
             about us

@@ -16,8 +16,12 @@ export const commentRouter = createTRPCRouter({
             user: {
               select: {
                 name: true,
+                image: true,
               },
             },
+          },
+          orderBy: {
+            createdAt: "desc",
           },
         });
         return comments;
@@ -34,20 +38,24 @@ export const commentRouter = createTRPCRouter({
     .input(
       z.object({
         body: z.string(),
-        menuItemId:z.string(),
-        rate:z.nativeEnum(CommentRate).nullable()
+        menuItemId: z.string(),
+        rate: z.nativeEnum(CommentRate).nullable(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       try {
         // const rate = getEnumFromValues(parseInt(input.rate))
-        if(!input.rate)return new TRPCError({message:"invalid rate",code:"BAD_REQUEST"})
+        if (!input.rate)
+          return new TRPCError({
+            message: "invalid rate",
+            code: "BAD_REQUEST",
+          });
         return ctx.prisma.comment.create({
           data: {
             body: input.body,
             userId: ctx.session.user.id,
-            menuItemId:input.menuItemId,
-            rate:input.rate
+            menuItemId: input.menuItemId,
+            rate: input.rate,
           },
           include: {
             user: {

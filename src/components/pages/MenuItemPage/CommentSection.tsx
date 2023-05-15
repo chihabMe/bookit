@@ -5,6 +5,7 @@ import { Comment } from "@prisma/client";
 export type ICommentItemWithUser = Comment & {
   user: {
     name: string | null;
+    image: string | null;
   };
 };
 

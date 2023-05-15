@@ -88,7 +88,7 @@ relative cursor-pointer !rounded-full !bg-transparent !p-4 px-2 py-2
 
         {user && user.user.role == "restaurant" && (
           <LeftAsideItem
-            href="/profile/restuarant/add-to-menu"
+            href="/profile/restaurant/add-to-menu"
             Icon={<PlusIcon className="h-6 w-6 md:h-8 md:w-8 " />}
           />
         )}

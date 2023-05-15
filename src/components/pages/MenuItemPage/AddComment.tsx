@@ -5,6 +5,7 @@ import Button from "~/components/ui/Button";
 import { getEnumFromValue } from "~/helpers/prismaEnumsConverters";
 import { toastError, toastSuccess } from "~/helpers/toasters";
 import { api } from "~/utils/api";
+
 const AddComment = ({ menuItemId }: { menuItemId: string }) => {
   const addCommentMutation = api.comments.addComment.useMutation();
   const [rated, setRated] = useState(0);
@@ -54,14 +55,9 @@ const AddComment = ({ menuItemId }: { menuItemId: string }) => {
           <div className="flex justify-between">
             <div className="mb-6 flex items-center">
               <div className="mr-4 inline-flex">
-                <button>
-                  <div className="flex items-center gap-2">
-                    <Rating
-                      value={rated}
-                      onChange={(value) => setRated(value)}
-                    />
-                  </div>
-                </button>
+                <div className="flex items-center gap-2">
+                  <Rating value={rated} onChange={(value) => setRated(value)} />
+                </div>
               </div>
               <span className="text-md font-bold text-text dark:text-text-dark ">
                 {rated}

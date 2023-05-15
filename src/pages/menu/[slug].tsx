@@ -21,14 +21,18 @@ import {
 
 import { StarIcon } from "@heroicons/react/24/solid";
 import CommentsSection from "~/components/pages/MenuItemPage/CommentSection";
+import { toastSuccess } from "~/helpers/toasters";
 
-type IParseAbleMenuItem = Omit<MenuItem,"createdAt"|"updatedAt"|"price">&{
- price: string;
+type IParseAbleMenuItem = Omit<
+  MenuItem,
+  "createdAt" | "updatedAt" | "price"
+> & {
+  price: string;
   createdAt: string;
-   updatedAt: string ;
-}
+  updatedAt: string;
+};
 interface MenuItemPageProps {
-  menuItem: IParseAbleMenuItem ; // Convert price to a JSON serializable type
+  menuItem: IParseAbleMenuItem; // Convert price to a JSON serializable type
 }
 
 const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
@@ -103,6 +107,7 @@ const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
                         } as unknown as ICartItem,
                         qt
                       );
+                      toastSuccess({ message: `added ${qt} items to cart` });
                     }}
                     className="px-8 py-4"
                   >
