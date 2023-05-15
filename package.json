@@ -26,6 +26,7 @@
     "@types/bcrypt": "^5.0.0",
     "bcrypt": "^5.1.0",
     "cookies": "^0.8.0",
+    "crypto": "^1.0.1",
     "framer-motion": "^10.12.4",
     "multer": "1.4.5-lts.1",
     "next": "^13.2.4",

@@ -9,7 +9,7 @@ export const commentRouter = createTRPCRouter({
       try {
         const comments = await ctx.prisma.comment.findMany({
           where: {
-            id: input.menuItemId,
+            menuItemId: input.menuItemId,
           },
           include: {
             user: {
@@ -34,6 +34,7 @@ export const commentRouter = createTRPCRouter({
     .input(
       z.object({
         body: z.string(),
+        menuItemId:z.string()
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -42,6 +43,8 @@ export const commentRouter = createTRPCRouter({
           data: {
             body: input.body,
             userId: ctx.session.user.id,
+            menuItemId:input.menuItemId
+
           },
           include: {
             user: {

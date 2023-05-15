@@ -131,7 +131,7 @@ model MenuCategory {
 model MenuItem {
   id             String          @id @default(uuid())
   name           String
-  slug           String          @default("")
+  slug           String           @unique
   price          Decimal
   description    String          @db.Text
   createdAt      DateTime        @default(now())

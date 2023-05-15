@@ -16,7 +16,7 @@ const CommentsSection = ({ menuItemId }: { menuItemId: string }) => {
   if (!commentsQuery.data) return <div>{commentsQuery.error?.message}</div>;
   return (
     <section className="mx-auto flex w-full max-w-[1200px] flex-col  gap-2">
-      <AddComment />
+      <AddComment menuItemId={menuItemId} />
       <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2  ">
         {commentsQuery.data.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
@@ -28,7 +28,6 @@ const CommentsSection = ({ menuItemId }: { menuItemId: string }) => {
 const CommentsSectionSkelaton = () => {
   return (
     <section className="mx-auto flex w-full max-w-[1200px] flex-col  gap-2">
-      <AddComment />
       <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2  ">
         <CommentItemSkelaton />
         <CommentItemSkelaton />

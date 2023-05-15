@@ -62,7 +62,6 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
       setItems((prev) => [...prev, { ...item, quantity: qt ?? 1 }]);
     }
   };
-  useEffect(() => {}, [items]);
   const cleare = () => {
     setItems([]);
   };

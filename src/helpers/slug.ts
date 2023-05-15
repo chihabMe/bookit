@@ -2,7 +2,7 @@ import slugify from "slugify";
 
 export async function generateUniqueSlug(
   txt: string,
-  exists: (slug: string) => Promise<boolean>
+  exists:  (slug: string) => Promise<boolean>
 ): Promise<string> {
   const slug = slugify(txt, {
     lower: true,

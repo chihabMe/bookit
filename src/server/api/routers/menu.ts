@@ -118,12 +118,18 @@ export const menuRouter = createTRPCRouter({
             code: "BAD_REQUEST",
             message: "invalid restaurant",
           });
-        const slug = await generateUniqueSlug(input.name, (slug: string) =>
-          ctx.prisma.menuItem.findFirst({
+        const slug = await generateUniqueSlug(input.name, async(slug) =>{
+
+           const item = await ctx.prisma.menuItem.findFirst({
             where: {
-              slug: slug,
+              slug:slug
             },
+            select:{
+              id:true
+            }
           })
+          return item!=null;
+        }
         );
         console.log("generated slug=", slug);
         return ctx.prisma.menuItem.create({

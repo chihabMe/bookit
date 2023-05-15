@@ -21,8 +21,14 @@ import {
 
 import { StarIcon } from "@heroicons/react/24/solid";
 import CommentsSection from "~/components/pages/MenuItemPage/CommentSection";
+
+type IParseAbleMenuItem = Omit<MenuItem,"createdAt"|"updatedAt"|"price">&{
+ price: string;
+  createdAt: string;
+   updatedAt: string ;
+}
 interface MenuItemPageProps {
-  menuItem: MenuItem & { price: string; createdAt: string; updatedAt: string }; // Convert price to a JSON serializable type
+  menuItem: IParseAbleMenuItem ; // Convert price to a JSON serializable type
 }
 
 const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
@@ -111,7 +117,7 @@ const MenuItemPage: NextPage<MenuItemPageProps> = ({ menuItem }) => {
                         {
                           ...menuItem,
                           price: menuItem.price.toString(),
-                        } as ICartItem,
+                        } as unknown as ICartItem,
                         qt
                       );
                     }}
@@ -150,8 +156,8 @@ export const getServerSideProps: GetServerSideProps<MenuItemPageProps> = async (
     const props: MenuItemPageProps = {
       menuItem: {
         ...menuItem,
-        createdAt: menuItem.createdAt.toString(),
-        updatedAt: menuItem.updatedAt.toString(),
+        createdAt: menuItem.createdAt.toISOString(),
+        updatedAt: menuItem.updatedAt.toISOString(),
         price: menuItem.price.toString(),
       },
     };

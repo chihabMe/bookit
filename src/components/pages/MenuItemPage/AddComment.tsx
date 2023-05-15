@@ -1,23 +1,26 @@
 import { Spinner, Textarea } from "@material-tailwind/react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { type ChangeEvent, type FormEvent, useState } from "react";
+
 import Button from "~/components/ui/Button";
 import { toastError, toastSuccess } from "~/helpers/toasters";
 import { api } from "~/utils/api";
-const AddComment = () => {
+const AddComment = ({menuItemId}:{menuItemId:string}) => {
   const addCommentMutation = api.comments.addComment.useMutation();
   const [body, setBody] = useState("");
-  const invalidate = () => api.useContext().comments.invalidate;
+  const utils = api.useContext()
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     addCommentMutation.mutate(
       {
         body,
+        menuItemId
       },
       {
         onSuccess: () => {
           toastSuccess({ message: "commented" });
           setBody("");
-          invalidate();
+          utils.comments.invalidate().catch(err=>console.log(err));
         },
         onError: (err) => {
           toastError({ message: err.message });

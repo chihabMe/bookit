@@ -48,7 +48,7 @@ const CommentItem = ({ comment }: { comment: ICommentItemWithUser }) => {
 };
 export const CommentItemSkelaton = () => {
   return (
-    <Card color="transparent" shadow={false} className="w-full max-w-[26rem]">
+    <Card color="transparent" shadow={false} className="w-full max-w-[26rem] h-[300px]">
       <CardHeader
         color="transparent"
         floated={false}
@@ -72,9 +72,9 @@ export const CommentItemSkelaton = () => {
           <Typography color="blue-gray"></Typography>
         </div>
       </CardHeader>
-      // <CardBody className="mb-6 p-0"></CardBody>
     </Card>
   );
 };
 
+      // <CardBody className="mb-6 p-0"></CardBody>
 export default CommentItem;

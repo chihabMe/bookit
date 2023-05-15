@@ -89,7 +89,7 @@ const AddToMenu = ({ categories }: { categories: MenuCategory[] }) => {
       </Head>
       <main>
         <section className="mx-auto mt-[150px] flex w-full max-w-[500px] flex-col gap-2">
-          <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 ">
+          <form onSubmit={(e)=>{handleFormSubmit(e).catch(err=>console.error(err))}} className="flex flex-col gap-6 ">
             <Input
               placeholder="name"
               type="text"
