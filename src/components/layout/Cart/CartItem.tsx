@@ -31,7 +31,7 @@ const CartItem = ({ item }: { item: ICartItem }) => {
   return (
     <li className=" flex shrink-0 items-center  justify-between gap-2  overflow-x-hidden rounded-2xl  px-4  py-4">
       <Image
-        src={"https://picsum.photos/100/100"}
+        src={item.image ?? "https://picsum.photos/100/100"}
         alt={`${item.name} image`}
         width={80}
         height={80}

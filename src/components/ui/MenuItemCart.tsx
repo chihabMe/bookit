@@ -39,6 +39,7 @@ const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
   };
   const [liked, setLiked] = useState(false);
   const handleLikeClick = () => setLiked((prev) => !prev);
+  console.log(item);
   return (
     <div className="!shadow-xs !w-[200px] w-full   max-w-[26rem] rounded-[20px]  p-2    shadow-lg transition-all duration-100   ">
       <div className="  relative flex w-full flex-col items-center  !py-1  !shadow-none ">
@@ -51,7 +52,7 @@ const MenuItemCartV1 = ({ item }: { item: MenuItem }) => {
         </Button>
         <Image
           alt={`${item.name} image`}
-          src={"https://picsum.photos/150/150"}
+          src={item.image ?? ""}
           width={130}
           height={130}
           className="   rounded-full "
