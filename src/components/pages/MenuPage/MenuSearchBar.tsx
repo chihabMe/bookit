@@ -1,4 +1,5 @@
 import { MagnifyingGlassIcon as SearchIcon } from "@heroicons/react/24/solid";
+import { Input } from "@material-tailwind/react";
 import { useState } from "react";
 import Button from "~/components/ui/Button";
 export const MenuSearchBar = () => {
@@ -29,4 +30,5 @@ export const MenuSearchBar = () => {
     </div>
   );
 };
+
 export default MenuSearchBar;

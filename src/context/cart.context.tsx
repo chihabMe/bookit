@@ -9,7 +9,7 @@ export interface ICartItem extends MenuItem {
 interface ICartContext {
   getTotal: () => number;
   items: ICartItem[];
-  cleare: () => void;
+  clear: () => void;
   addItem: (item: ICartItem, qt?: number) => void;
   removeItem: (id: string) => void;
   increaseItem: (id: string, qt?: number) => void;
@@ -19,7 +19,7 @@ interface ICartContext {
 
 const initialState: ICartContext = {
   items: [],
-  cleare: () => null,
+  clear: () => null,
   addItem: (item: ICartItem) => null,
   removeItem: (id: string) => null,
   increaseItem: (id: string) => null,
@@ -62,7 +62,7 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
       setItems((prev) => [...prev, { ...item, quantity: qt ?? 1 }]);
     }
   };
-  const cleare = () => {
+  const clear = () => {
     setItems([]);
   };
   useEffect(() => {
@@ -90,7 +90,7 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
     getNumberOfItems,
     getTotal,
     items,
-    cleare,
+    clear,
     increaseItem,
     decreaseItem,
     removeItem,

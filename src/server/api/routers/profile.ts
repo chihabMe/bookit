@@ -33,10 +33,15 @@ export const profileRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       try {
+        const defaultImage =
+          input.type == "restaurant"
+            ? "/images/restaurant.png"
+            : "/images/delevery.png";
         const user = await ctx.prisma.user.update({
           where: { id: ctx.session.user.id },
           data: {
             role: input.type,
+            image: defaultImage,
           },
         });
         if (input.type == "restaurant") {
@@ -63,6 +68,7 @@ export const profileRouter = createTRPCRouter({
         name: z.string().nullable(),
         phone: z.string().nullable(),
         location: z.string().nullable(),
+        image: z.string().nullable(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -75,6 +81,7 @@ export const profileRouter = createTRPCRouter({
             phone: input.phone,
             location: input.location,
             name: input.name,
+            image: input.image,
           },
         });
         return getUserWihtoutPassword(user);

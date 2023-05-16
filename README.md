@@ -14,19 +14,19 @@
 
 # How to Run the Project
 
-## Prerequisites
+## Requrements
 
 #### Make sure you have the following environment variables set:
 
--DATABASE_URL=""
--NEXTAUTH_URL=""
--NEXTAUTH_SECRET=""
--DISCORD_CLIENT_ID=""
--DISCORD_CLIENT_SECRET=""
--S3_BUCKET_NAME=""
--S3_REGION=""
--AWS_SECRET=""
--AWS_KEY=""
+- DATABASE_URL=""
+- NEXTAUTH_URL=""
+- NEXTAUTH_SECRET=""
+- DISCORD_CLIENT_ID=""
+- DISCORD_CLIENT_SECRET=""
+- S3_BUCKET_NAME=""
+- S3_REGION=""
+- AWS_SECRET=""
+- AWS_KEY=""
 
 ## Installation
 

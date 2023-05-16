@@ -4,7 +4,10 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 export const restaurantsRouter = createTRPCRouter({
   getResturants: publicProcedure.query(({ ctx }) => {
     try {
-      return ctx.prisma.restaurant.findMany({
+      return ctx.prisma.user.findMany({
+        include: {
+          restaurant: true,
+        },
         take: 10,
       });
     } catch (err) {
